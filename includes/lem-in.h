@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/29 16:06:42 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/30 14:41:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 #define LEM_IN_H
 
 #include "libft.h"
+#define BUFF_SIZE 8
 
 #endif
