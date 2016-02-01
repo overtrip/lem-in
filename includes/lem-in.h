@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/30 14:41:01 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/01 16:08:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #define LEM_IN_H
 
 #include "libft.h"
-#define BUFF_SIZE 8
+
+/*typedef struct			s_map
+{
+	void				*data;
+	struct s_list		*next;
+}						t_map;*/
+
+void	ft_error(t_list *map);
 
 #endif

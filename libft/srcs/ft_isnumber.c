@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/01 16:08:24 by jealonso         ###   ########.fr       */
+/*   Created: 2016/02/01 14:56:32 by jealonso          #+#    #+#             */
+/*   Updated: 2016/02/01 15:04:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-#include <stdio.h>
+#include "libft.h"
 
-static void	ft_get_map(t_list **map, char *buff)
+int	ft_isnumber(char *str)
 {
-	if (!buff)
-		return ;
-	ft_list_push_back(map, ft_create_elem(buff));
-}
-
-int			main()
-{
-	t_list	*map;
-	char	*buff;
-
-	buff = NULL;
-	map = NULL;
-	while (get_next_line(0, &buff) > 0)
+	if (*str == '-' || *str == '+')
+		++str;
+	while (*str)
 	{
-		ft_get_map(&map, buff);
+		if ((*str) < '0' || (*str) > '9')
+			return (0);
+		++str;
 	}
-	ft_error(map);
-	ft_putlist(map);
+	if (!*str)
+		return (1);
 	return (0);
 }

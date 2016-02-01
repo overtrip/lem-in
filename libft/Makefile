@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2015/12/13 16:58:29 by jealonso         ###   ########.fr        #
+#    Updated: 2016/02/01 15:05:41 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_islower.c \
+	ft_isnumber.c \
 	ft_isprint.c \
 	ft_isupper.c \
 	ft_itoa.c \
