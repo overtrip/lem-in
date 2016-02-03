@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/02/03 14:44:33 by jealonso         ###   ########.fr        #
+#    Updated: 2016/02/03 18:04:24 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS 		= \
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
 
 #HEAD:
-HFILES	= lem-in.h
+HFILES	= lem_in.h
 HEAD	= $(patsubst %.h, $(INCPATH)/%.h, $(HFILES))
 
 all: $(LIBFT) $(OBJSPATH) $(NAME)

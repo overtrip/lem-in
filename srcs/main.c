@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 17:03:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/03 17:51:57 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,28 @@ static void	ft_get_map(t_list **map, char *buff)
 	if (!buff)
 		return ;
 	ft_list_push_back(map, ft_create_elem(buff));
+}
+
+static void	ft_linker(t_list **map)
+{
+	t_list	*control;
+	t_list	*begin;
+
+	begin = find_tube(*map);
+	while (map && !ft_strequ((*map)->data, begin->data))
+	{
+		if (ft_strequ((*map)->data, "##start"))
+			(*map)->i = 1;
+		if (ft_strequ((*map)->data, "##end"))
+			(*map)->i = 2;
+		control = begin;
+		while (control)
+		{
+			if (ft_pile_face((*map)->data, control->data))
+				control = control->next;
+		}
+		*map = (*map)->next;
+	}
 }
 
 int			main(void)
@@ -32,6 +54,6 @@ int			main(void)
 		ft_get_map(&map, buff);
 	}
 	ft_error(map);
-	ft_putlist(map);
+	ft_linker(&map);
 	return (0);
 }

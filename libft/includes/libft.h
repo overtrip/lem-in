@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 16:58:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/03 17:47:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct		s_list
 {
 	void			*data;
 	struct s_list	*next;
+	struct s_list	**link;
+	int				i;
 }					t_list;
 
 typedef struct		s_read
@@ -64,7 +66,7 @@ void				*ft_memset(void *s, int c, size_t n);
 void				ft_putchar(char c);
 int					ft_putchar_fd(char c, int fd);
 void				ft_putchar_l(char c);
-int				ft_putendl(char const *s);
+int					ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putlist(t_list *list);
 void				ft_putnbr(int n);

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 16:04:41 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 17:02:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/03 17:48:03 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,37 +39,6 @@ static void		ft_prerequis(t_list *map)
 		ft_putendl("multiples start et/ou end");
 	if (l_name == 1)
 		ft_putendl("Name room beagin to \'l\'");
-}
-
-static t_list	*find_tube(t_list *map)
-{
-	t_list	*begin_tube;
-
-	begin_tube = NULL;
-	while (map)
-	{
-		if (ft_strchr(map->data, '-'))
-		{
-			begin_tube = map;
-			break ;
-		}
-		map = map->next;
-	}
-	return (begin_tube);
-}
-
-static int		ft_pile_face(char *str1, char *str2)
-{
-	char	*begin;
-	char	*pile;
-	char	*face;
-
-	begin = ft_begin_str(str1, ' ');
-	pile = ft_cut_str(str2, '-');
-	face = ft_begin_str(str2, '-');
-	if (ft_strequ(begin, pile) || ft_strequ(begin, face))
-		return (1);
-	return (0);
 }
 
 static void		ft_tube(t_list *map)
