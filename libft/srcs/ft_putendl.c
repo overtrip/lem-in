@@ -6,23 +6,20 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 15:52:33 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/10 11:35:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/03 17:02:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char const *s)
+int	ft_putendl(char const *s)
 {
 	int	cmp;
 
-	cmp = 0;
+	cmp = ft_strlen(s);
 	if (!s)
-		return ;
-	while (s[cmp] != '\0')
-	{
-		ft_putchar(s[cmp]);
-		cmp++;
-	}
+		return (0);
+	write(1, s, cmp);
 	ft_putchar('\n');
+	return (++cmp);
 }

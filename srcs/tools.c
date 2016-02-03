@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 17:03:37 by jealonso         ###   ########.fr       */
+/*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
+/*   Updated: 2016/02/03 16:02:11 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-#include <stdio.h>
 
-static void	ft_get_map(t_list **map, char *buff)
+char	*ft_begin_str(char *str, char c)
 {
-	if (!buff)
-		return ;
-	ft_list_push_back(map, ft_create_elem(buff));
+	char	*begin;
+	int		size;
+
+	begin = str;
+	if (!str)
+		return (begin);
+	str = ft_strchr(str, c);
+	size = (str) ? str - begin : ft_strlen(begin);
+	return (ft_strndup(begin, size));
 }
 
-int			main(void)
+char	*ft_cut_str(char *str, char c)
 {
-	t_list	*map;
-	char	*buff;
+	char	*ptr;
 
-	buff = NULL;
-	map = NULL;
-	while (get_next_line(0, &buff) > 0)
-	{
-		ft_get_map(&map, buff);
-	}
-	ft_error(map);
-	ft_putlist(map);
-	return (0);
+	ptr = NULL;
+	if (str)
+		ptr = ft_strchr(str, c);
+	if (ptr)
+		return (++ptr);
+	else
+		return (ptr);
 }

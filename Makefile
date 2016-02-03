@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/01/29 15:56:53 by jealonso         ###   ########.fr        #
+#    Updated: 2016/02/03 14:44:33 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ NAME 		= lem-in
 
 #SRCRS:
 SRCS 		= \
+			error.c \
 			main.c \
+			tools.c \
 
 #OBJ:
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
