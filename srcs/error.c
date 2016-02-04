@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 16:04:41 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 17:48:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/04 14:14:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		ft_prerequis(t_list *map)
 {

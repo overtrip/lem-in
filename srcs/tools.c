@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 17:52:05 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/04 17:00:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 char	*ft_begin_str(char *str, char c)
 {
@@ -45,7 +45,7 @@ t_list	*find_tube(t_list *map)
 	begin_tube = NULL;
 	while (map)
 	{
-//TODO creer une nouvelle liste sans commentaires
+		//TODO creer une nouvelle liste sans commentaires
 		if (ft_strchr(map->data, '-'))
 		{
 			begin_tube = map;
