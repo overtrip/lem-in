@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 16:04:41 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/04 14:14:14 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/05 14:22:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		ft_prerequis(t_list *map)
 			++flag;
 		if (ft_strstr(map->data, "##end") && ++secu && flag == 1)
 			++flag;
-		if (((char *)(map->data))[0] == 'l')
+		if (((char *)(map->data))[0] == 'L')
 			l_name = 1;
 		map = map->next;
 	}
@@ -38,7 +38,7 @@ static void		ft_prerequis(t_list *map)
 	else if (secu > 2)
 		ft_putendl("multiples start et/ou end");
 	if (l_name == 1)
-		ft_putendl("Name room beagin to \'l\'");
+		ft_putendl("Name room beagin to \'L\'");
 }
 
 static void		ft_tube(t_list *map)
