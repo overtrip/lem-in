@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/04 17:00:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/10 18:38:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_list	*find_tube(t_list *map)
 	begin_tube = NULL;
 	while (map)
 	{
-		//TODO creer une nouvelle liste sans commentaires
 		if (ft_strchr(map->data, '-'))
 		{
 			begin_tube = map;
@@ -59,13 +58,29 @@ t_list	*find_tube(t_list *map)
 int		ft_pile_face(char *str1, char *str2)
 {
 	char	*begin;
-	char	*pile;
-	char	*face;
+	char	*droite;
+	char	*gauche;
 
 	begin = ft_begin_str(str1, ' ');
-	pile = ft_cut_str(str2, '-');
-	face = ft_begin_str(str2, '-');
-	if (ft_strequ(begin, pile) || ft_strequ(begin, face))
+	droite = ft_cut_str(str2, '-');
+	gauche = ft_begin_str(str2, '-');
+//	printf("[%s](begin)   [%s](gauche)   [%s](droite)\n",begin, gauche, droite);
+	if (ft_strequ(begin, droite))
 		return (1);
+	if (ft_strequ(begin, gauche))
+		return (2);
 	return (0);
+}
+
+void	ft_config_room(t_list **map, int *flag)
+{
+	--flag;
+	if (ft_strequ((*map)->data, "##start"))
+	{
+		*map = (*map)->next;
+		(*map)->i = 1;
+	}
+	if (ft_strequ((*map)->data, "##end"))
+		(*map)->i = 2;
+
 }
