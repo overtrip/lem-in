@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/10 18:38:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/24 17:46:52 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_get_map(t_list **map, char *buff)
 	ft_list_push_back(map, ft_create_elem(buff));
 }
 
-t_list	*ft_match(char *str, t_list **map)
+t_list		*ft_match(char *str, t_list **map)
 {
 	t_list *save;
 	t_list *begin;
@@ -42,86 +42,58 @@ t_list	*ft_match(char *str, t_list **map)
 	return (save);
 }
 
-int		ft_verif_size(t_list *room, int *nb)
+t_list		*ft_val(char *str, t_list **map)
 {
-	t_list	*save;
-	int	i;
-	int		flag;
-
-	i = -1;
-	flag = 0;
-	save = room;
-	if (!room->link)
-		return (0);
-	while (room->link[++i])
-		if (i >= *nb)
-			++flag;
-	if (flag)
-	{
-		*nb = i;
-		return (1);
-	}
-	room = save;
-	return (0);
-}
-
-void	ft_resize(t_list **room, int nb)
-{
-	t_list	*save;
-	t_list	*tmp;
-	int		i;
-
-	tmp = NULL;
-	save = tmp;
-	i = -1;
-	if (!(tmp->link = (t_list **)malloc(sizeof(t_list *) * (nb + SIZE))))
-		return ;
-	while ((*room)->link[++i])
-		tmp->link[i] = (*room)->link[i];
-	(*room)->link = tmp->link;
-}
-
-void	ft_complete(t_list **room, char *control, t_list **save)
-{
-	int	i;
-
-	i = -1;
-	if (!(*room)->link)
-		if(ft_pile_face((*map)->data, control->data) == 1)
-			(*room)->link[0] = ft_match(ft_cut_str(control->data, '-'), save);
-}
-
-void	ft_linker(t_list **map, t_list **save)
-{
-	t_list	*control;
 	t_list	*begin;
-	int		flag;
-	int		i;
+	t_list	*tmp;
 
-	i = SIZE;
-	flag = 2;
-	begin = find_tube(*map);
-	while (map && !ft_strequ((*map)->data, begin->data))
+	begin = *map;
+	while (map)
 	{
-		if (flag > 0 && ((char *)((*map)->data))[0] == '#')
-			ft_config_room(map, &flag);
-				control = begin;
-		while (control)
+		if (ft_strequ(ft_cut_str((*map)->data, ' '), str))
 		{
-			if (ft_pile_face((*map)->data, control->data) > 0)
-			{
-				if (ft_verif_size(*map, &i))
-					ft_resize((*map)->link, i);
-				ft_complete((*map)->link, control->data, save);
-				(*map)->link[i++] =
-						(ft_pile_face((*map)->data, control->data) == 1)
-						? ft_match(ft_cut_str(control->data, '-'), save)
-						: ft_match(ft_begin_str(control->data ,'-'), save);
-			}
-				control = control->next;
+			tmp = (*map);
+			*map = begin;
+			return (tmp);
 		}
-		i = 0;
 		*map = (*map)->next;
+	}
+	*map = begin;
+	return (begin);
+}
+
+void		ft_find_room(t_list **map, t_list *tube)
+{
+	char	*room;
+	t_list	*tmp;
+	int		val;
+
+	room = ft_begin_str((*map)->data, ' ');
+	while (tube)
+	{
+		if ((val = ft_pile_face(room, tube->data)))
+		{
+			if (val == 2)
+				tmp = ft_val(ft_begin_str(tube->data, '-'), map);
+			else
+				tmp = ft_val(ft_cut_str(tube->data, '-') , map);
+			//TODO change line 81 to a function who check if link->tab  not
+			//empty and if was infact so realloc
+			(*map)->link = tmp;
+		}
+		tube = tube->next;
+	}
+}
+
+void		ft_linker(t_list **map, t_list **save)
+{
+	t_list	*tube;
+
+	tube = find_tube(*map);
+	while ((*map) != tube)
+	{
+		ft_find_room(map, tube);
+		(*map) = (*map)->next;
 	}
 	map = save;
 }
@@ -132,7 +104,6 @@ void		ft_display_link(t_list *map)
 	{
 		printf("[%p](map)       [%s](map->data)        [%p](map->link)\n",
 				map, ft_begin_str(map->data, ' '), map->link);
-
 		map = map->next;
 	}
 }
@@ -151,8 +122,8 @@ int			main(void)
 	}
 	save = map;
 	ft_error(map);
-//	ft_putlist(map);
-	ft_display_link(map);
+	ft_putlist(map);
 	ft_linker(&(map->next), &save);
+//	ft_display_link(map);
 	return (0);
 }

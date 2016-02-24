@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/10 18:38:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/24 16:04:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,4 @@ void	ft_config_room(t_list **map, int *flag)
 	}
 	if (ft_strequ((*map)->data, "##end"))
 		(*map)->i = 2;
-
 }
