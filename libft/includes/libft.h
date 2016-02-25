@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/04 14:15:33 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/25 17:12:46 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_list
 	struct s_list	*next;
 	struct s_list	**link;
 	int				i;
+	int				nb_malloc;
 	int				presence;
 }					t_list;
 

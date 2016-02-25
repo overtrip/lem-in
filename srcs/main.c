@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/24 17:46:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/02/25 18:07:25 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_list		*ft_val(char *str, t_list **map)
 	begin = *map;
 	while (map)
 	{
+		ft_putendl("loop map -> ft_val");
 		if (ft_strequ(ft_cut_str((*map)->data, ' '), str))
 		{
 			tmp = (*map);
@@ -60,6 +61,59 @@ t_list		*ft_val(char *str, t_list **map)
 	}
 	*map = begin;
 	return (begin);
+}
+
+t_list		*ft_realloc_room(t_list **map)
+{
+	t_list	*tmp;
+	t_list	*begin;
+	int		nb;
+
+	nb = -1;
+	if(!(tmp = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	if (!(tmp->link = (t_list **)malloc(sizeof(t_list *) *
+					((*map)->nb_malloc + 5))))
+		return (NULL);
+	(*map)->nb_malloc = ((*map)->nb_malloc) + 5;
+	begin = *tmp->link;
+	while (tmp->link)
+	{
+		if ((*map)->link)
+		{
+			tmp->link = (*map)->link;
+			++(*map)->link;
+		}
+		else
+			tmp->link = NULL;
+		++tmp->link;
+	}
+	*tmp->link = begin;
+	return (*tmp->link);
+}
+
+void		ft_check_malloc(t_list ** map)
+{
+	int		nb;
+	t_list	*save;
+
+	nb = -1;
+	save = *map;
+	while ((*map)->link)
+		++nb;
+	if (nb >= (*map)->nb_malloc)
+		*(*map)->link = ft_realloc_room(save->link);
+}
+
+void		ft_add_room(t_list **map, t_list **room)
+{
+	t_list	*save;
+
+	save = *(*map)->link;
+	ft_check_malloc(map);
+	while ((*map)->link)
+		++(*map)->link;
+	(*map)->link = room;
 }
 
 void		ft_find_room(t_list **map, t_list *tube)
@@ -73,13 +127,21 @@ void		ft_find_room(t_list **map, t_list *tube)
 	{
 		if ((val = ft_pile_face(room, tube->data)))
 		{
+	ft_putendl("ici");
 			if (val == 2)
+			{
+	ft_putendl("le if -> main 132");
 				tmp = ft_val(ft_begin_str(tube->data, '-'), map);
+			}
 			else
+			{
+	ft_putendl("le else -> main 137");
 				tmp = ft_val(ft_cut_str(tube->data, '-') , map);
+			}
 			//TODO change line 81 to a function who check if link->tab  not
 			//empty and if was infact so realloc
-			(*map)->link = tmp;
+			//(*map)->link = tmp;
+			ft_add_room(map, &tmp);
 		}
 		tube = tube->next;
 	}
@@ -122,8 +184,8 @@ int			main(void)
 	}
 	save = map;
 	ft_error(map);
-	ft_putlist(map);
+//	ft_putlist(map);
 	ft_linker(&(map->next), &save);
-//	ft_display_link(map);
+	ft_display_link(map);
 	return (0);
 }
