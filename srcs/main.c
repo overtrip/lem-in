@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/26 18:13:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/03/09 18:11:50 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,17 @@ t_list		*ft_match(char *str, t_list **map)
 
 void		ft_display_link(t_list *map)
 {
-	while (map)
+	int i;
+	t_list	*tube;
+
+	tube = find_tube(map);
+	while (!ft_strequ(map->data, tube->data))
 	{
-		printf("[%p](map)       [%s](map->data)        [%p](map->link)\n",
-				map, ft_begin_str(map->data, ' '), map->link);
+		i = -1;
+		while (++i <= map->nb_malloc)
+			if (map->link[i])
+			printf("[%p](map)\t[%s](map->data)\t\t[%p](map->link)\n",
+				map, ft_begin_str(map->data, ' '), map->link[i]);
 		map = map->next;
 	}
 }
@@ -56,16 +63,15 @@ t_list		*ft_val(char *str, t_list **map)
 {
 	t_list	*begin;
 	t_list	*tube;
+	char	*tmp;
 
 	begin = *map;
 	tube  = find_tube(*map);
-	while (map)
+	while (ft_strcmp((*map)->data, tube->data))
 	{
-		if (ft_strequ(ft_begin_str((*map)->data, ' '), str))
-		{
-			*map = begin;
+		tmp = ft_begin_str((*map)->data, ' ');
+		if (ft_strequ(tmp, str))
 			return (*map);
-		}
 		*map = (*map)->next;
 	}
 	*map = begin;
@@ -118,69 +124,67 @@ void		ft_check_malloc(t_list ** map)
 
 void		ft_add_room(t_list **map, t_list **room)
 {
-	t_list	*save;
 	int		i;
 
 	i = 0;
-	save = *(*map)->link;
 	ft_check_malloc(map);
-	while (i < (*map)->nb_malloc && (*map)->link[i])
+	while (i <= (*map)->nb_malloc && (*map)->link[i])
 		++i;
-	(*map)->link = room;
-
+	(*map)->link[i] = *room;
 }
 
 void		ft_find_room(t_list **map, t_list *tube)
 {
 	char	*room;
 	t_list	*tmp;
+	t_list	*save;
 	int		val;
 
 	room = ft_begin_str((*map)->data, ' ');
+	save = *map;
 	while (tube)
 	{
 		if ((val = ft_pile_face(room, tube->data)))
 		{
 			if (val == 2)
-				tmp = ft_val(ft_begin_str(tube->data, '-'), map);
+				tmp = ft_val(ft_cut_str(tube->data, '-'), map);
 			else
-				tmp = ft_val(ft_cut_str(tube->data, '-') , map);
+				tmp = ft_val(ft_begin_str(tube->data, '-') , map);
+			*map = save;
+		//	printf("[%s]  [%s]\n", (*map)->data, tmp->data);
 			ft_add_room(map, &tmp);
 		}
 		tube = tube->next;
 	}
 }
 
-void		ft_linker(t_list **map, t_list **save)
+void		ft_linker(t_list **map)
 {
+	t_list	*tmp;
 	t_list	*tube;
 
 	tube = find_tube(*map);
+	tmp = *map;
 	while ((*map) != tube)
 	{
 		ft_find_room(map, tube);
 		(*map) = (*map)->next;
 	}
-	map = save;
-	ft_display_link(*map);
+	*map = tmp;
 }
 
 int			main(void)
 {
 	t_list	*map;
-	t_list	*save;
 	char	*buff;
 
 	buff = NULL;
 	map = NULL;
 	while (get_next_line(0, &buff) > 0)
-	{
 		ft_get_map(&map, buff);
-	}
-	save = map;
 	ft_error(map);
+	ft_linker(&(map->next));
+	ft_display_link(map);
 //	ft_putlist(map);
-	ft_linker(&(map->next), &save);
-//	ft_display_link(map);
 	return (0);
 }
