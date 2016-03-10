@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/03/09 18:11:50 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/03/10 17:53:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,14 @@ t_list		*ft_realloc_room(t_list **map)
 	if (!(tmp->link = (t_list **)malloc(sizeof(t_list *) *
 					((*map)->nb_malloc + 5))))
 		return (NULL);
-	(*map)->nb_malloc = ((*map)->nb_malloc) + 5;
+	(*map)->nb_malloc += 5;
 	begin = *tmp->link;
-	while (tmp->link)
+	while (tmp->link[++nb])
 	{
-		if ((*map)->link)
-		{
-			tmp->link = (*map)->link;
-			++(*map)->link;
-		}
+		if ((*map)->link[nb])
+			tmp->link[nb] = (*map)->link[nb];
 		else
-			tmp->link = NULL;
-		++tmp->link;
+			tmp->link[nb] = NULL;
 	}
 	*tmp->link = begin;
 	return (*tmp->link);
@@ -111,15 +107,13 @@ void		ft_check_malloc(t_list ** map)
 {
 	int		nb;
 	int		i;
-	t_list	*save;
 
-	nb = -1;
+	nb = 0;
 	i = -1;
-	save = *map;
 	while (++i < (*map)->nb_malloc && (*map)->link[i])
 		++nb;
 	if (nb >= (*map)->nb_malloc)
-		*(*map)->link = ft_realloc_room(save->link);
+		*(*map)->link = ft_realloc_room((*map)->link);
 }
 
 void		ft_add_room(t_list **map, t_list **room)
@@ -128,7 +122,7 @@ void		ft_add_room(t_list **map, t_list **room)
 
 	i = 0;
 	ft_check_malloc(map);
-	while (i <= (*map)->nb_malloc && (*map)->link[i])
+	while ((*map)->link[i])
 		++i;
 	(*map)->link[i] = *room;
 }
@@ -185,6 +179,6 @@ int			main(void)
 	ft_error(map);
 	ft_linker(&(map->next));
 	ft_display_link(map);
-//	ft_putlist(map);
+	ft_putlist(map);
 	return (0);
 }
