@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/03/09 18:11:51 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/03/11 13:55:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int		ft_pile_face(char *str1, char *str2)
 	begin = ft_begin_str(str1, ' ');
 	droite = ft_cut_str(str2, '-');
 	gauche = ft_begin_str(str2, '-');
-//	printf("[%s](begin)   [%s](gauche)   [%s](droite)\n",begin, gauche, droite);
 	if (ft_strequ(begin, droite))
 		return (1);
 	if (ft_strequ(begin, gauche))

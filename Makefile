@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/02/03 18:04:24 by jealonso         ###   ########.fr        #
+#    Updated: 2016/03/11 16:02:55 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ NAME 		= lem-in
 SRCS 		= \
 			error.c \
 			main.c \
+			memory.c \
 			tools.c \
 
 #OBJ:
