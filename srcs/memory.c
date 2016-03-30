@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 15:57:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/03/30 17:38:25 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/03/30 17:49:12 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void				ft_add_room(t_list *map, t_list *room)
 	int		i;
 
 	i = 0;
-//printf("[%s](map)\t[%s](room a linker)\n", (*map)->data, room->data);
 	ft_check_malloc(map);
 	while (map->link[i])
 		++i;
