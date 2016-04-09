@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/03/30 17:48:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/09 17:23:30 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void				ft_display_link(t_list *map)
 		i = -1;
 		while (++i <= map->nb_malloc)
 			if (map->link[i])
-				printf("[%p](map)\t[%s](map->data)\t[%s](map->link)\n",
+				printf("[%p](map)\t[%s](map->data)\t[%s](%d)(map->link)\n",
 					map, ft_begin_str(map->data, ' '),
-					ft_begin_str(map->link[i]->data, ' '));
+					ft_begin_str(map->link[i]->data, ' '), i);
 		map = map->next;
 	}
 }
@@ -105,7 +105,9 @@ int					main(void)
 		ft_get_map(&map, buff);
 	ft_error(map);
 	ft_linker(map->next);
-	ft_display_link(map);
-	ft_putlist(map);
+	ft_find_way(map);
+//	ft_resolver(map);
+//	ft_display_link(map);
+//	ft_putlist(map);
 	return (0);
 }
