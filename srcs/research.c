@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/09 18:13:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/09 18:27:58 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_see_way(t_chain *way)
 	while (way)
 	{
 		temp = way;
+		printf("(%ld)", way->len);
 		while (temp)
 		{
-			if (temp->data)
 			printf("[%s]->", temp->data->data);
 			temp = temp->chain;
 		}
@@ -88,10 +88,7 @@ void	ft_solver(t_list *room, t_list *end, t_chain **way, t_chain **network)
 	room->i = 1;
 	(*way)->len += 1;
 	if (room == end)
-	{
-		ft_see_way(*way);
 		ft_new_way(network, *way);
-	}
 	else
 	{
 		while (++i < room->nb_malloc)

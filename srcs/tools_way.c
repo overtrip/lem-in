@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/08 16:26:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/09 18:12:18 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/09 18:27:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 void	ft_new_way(t_chain **network, t_chain *old)
 {
 	t_chain	*new;
+	t_chain	*temp;
 
 	new = NULL;
-	while (old->chain)
+	while (old)
 	{
-		ft_chain_push_back(&new, ft_create_chain(old->data));
+		temp = ft_create_chain(old->data);
+		temp->len = old->len;
+		ft_chain_push_back(&new, temp);
 		old = old->chain;
 	}
+	// TODO trier par longeur a l'insertion
 	new->next = *network;
 	*network = new;
 }
