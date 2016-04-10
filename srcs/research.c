@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/09 18:27:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/10 18:05:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 **					TODO		DELETE THIS FUNCTION
 */
 
-void	ft_see_way(t_chain *way)
+void			ft_see_way(t_chain *way)
 {
-	t_chain		*temp;
+	t_chain	*temp;
 
 	while (way)
 	{
@@ -34,7 +34,7 @@ void	ft_see_way(t_chain *way)
 	}
 }
 
-t_list	*find_start(t_list *map, char *str)
+static t_list	*find_start(t_list *map, char *str)
 {
 	while (map)
 	{
@@ -45,22 +45,9 @@ t_list	*find_start(t_list *map, char *str)
 	return (NULL);
 }
 
-t_list		*ft_see_link(t_list *map)
+static void		ft_chain_pop_back(t_chain **way)
 {
-	int	i;
-
-	i = -1;
-	while (++i <= map->nb_malloc)
-	{
-		if (map->i == 0 && (map->i = 1))
-			return (map->link[i]);
-	}
-	return (NULL);
-}
-
-void	ft_chain_pop_back(t_chain **way)
-{
-	t_chain		*temp;
+	t_chain	*temp;
 
 	temp = *way;
 	if (!*way)
@@ -79,7 +66,8 @@ void	ft_chain_pop_back(t_chain **way)
 	}
 }
 
-void	ft_solver(t_list *room, t_list *end, t_chain **way, t_chain **network)
+static void		ft_solver(t_list *room, t_list *end,
+		t_chain **way, t_chain **network)
 {
 	int	i;
 
@@ -102,7 +90,7 @@ void	ft_solver(t_list *room, t_list *end, t_chain **way, t_chain **network)
 	ft_chain_pop_back(way);
 }
 
-void	ft_find_way(t_list *map)
+void			ft_find_way(t_list *map)
 {
 	t_list	*start;
 	t_list	*end;
@@ -114,6 +102,5 @@ void	ft_find_way(t_list *map)
 	start = find_start(map, "##start");
 	end = find_start(map, "##end");
 	ft_solver(start, end, &way, &network);
-	//printf("[%p]\n",network);
 	ft_see_way(network);
 }

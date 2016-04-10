@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/09 17:57:12 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/10 18:06:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <stdio.h>
 # define SIZE 5
 
-typedef struct		s_chain
+typedef struct			s_chain
 {
-	size_t			len;
-	struct s_chain	*chain;
-	struct s_chain	*next;
-	t_list			*data;
-}					t_chain;
+	size_t				len;
+	struct s_chain		*chain;
+	struct s_chain		*next;
+	t_list				*data;
+}						t_chain;
 
 void					ft_error(t_list *map);
 char					*ft_begin_str(char *str, char c);
@@ -38,6 +38,6 @@ void					ft_chain_push_back(t_chain **begin, t_chain *new);
 void					ft_find_way(t_list *map);
 void					ft_clear_null(t_list *map);
 
-void                ft_display_link(t_list *map);
+void					ft_display_link(t_list *map);
 
 #endif

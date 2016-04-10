@@ -6,11 +6,40 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/08 16:26:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/09 18:27:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/10 17:25:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void	ft_sort_chain(t_chain **network, t_chain *new)
+{
+	t_chain	*tmp;
+	t_chain	*save;
+
+	tmp = *network;
+	save = *network;
+	if (!save || new->len <= save->len)
+	{
+		new->next = *network;
+		*network = new;
+	}
+	else
+	{
+		while (save && new->len > save->len)
+		{
+			tmp = save;
+			save = save->next;
+		}
+		if (!save)
+			tmp->next = new;
+		else
+		{
+			tmp->next = new;
+			new->next = save;
+		}
+	}
+}
 
 void	ft_new_way(t_chain **network, t_chain *old)
 {
@@ -25,9 +54,7 @@ void	ft_new_way(t_chain **network, t_chain *old)
 		ft_chain_push_back(&new, temp);
 		old = old->chain;
 	}
-	// TODO trier par longeur a l'insertion
-	new->next = *network;
-	*network = new;
+	ft_sort_chain(network, new);
 }
 
 t_chain	*ft_create_chain(t_list *map)
