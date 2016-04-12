@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/10 18:05:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/12 15:54:02 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void		ft_solver(t_list *room, t_list *end,
 	ft_chain_pop_back(way);
 }
 
-void			ft_find_way(t_list *map)
+t_chain			*ft_find_way(t_list *map)
 {
 	t_list	*start;
 	t_list	*end;
@@ -103,4 +103,5 @@ void			ft_find_way(t_list *map)
 	end = find_start(map, "##end");
 	ft_solver(start, end, &way, &network);
 	ft_see_way(network);
+	return (way);
 }

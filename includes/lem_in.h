@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/10 18:06:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/12 15:53:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void					ft_add_room(t_list *map, t_list *room);
 void					ft_new_way(t_chain **network, t_chain *old);
 t_chain					*ft_create_chain(t_list *tmp);
 void					ft_chain_push_back(t_chain **begin, t_chain *new);
-void					ft_find_way(t_list *map);
+t_chain					*ft_find_way(t_list *map);
 void					ft_clear_null(t_list *map);
 
 void					ft_display_link(t_list *map);
