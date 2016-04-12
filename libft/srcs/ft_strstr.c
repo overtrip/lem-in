@@ -3,35 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 19:58:37 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/07 16:25:43 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/21 16:50:25 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:39:33 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
-char	*ft_strstr(char *str, char *to_find)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	int	cmp_tf;
-	int cmp_str;
+	size_t	length;
+	char	*ptr;
 
-	cmp_tf = 0;
-	cmp_str = 0;
-	if (to_find[cmp_tf] == '\0')
-		return (str);
-	while (str[cmp_str])
+	length = ft_strlen(s2);
+	ptr = (char *)s1;
+	while (*ptr)
 	{
-		while (str[cmp_str] == to_find[cmp_tf])
-		{
-			if (to_find[cmp_tf + 1] == '\0')
-				return (&str[(cmp_str - cmp_tf)]);
-			cmp_tf++;
-			cmp_str++;
-		}
-		cmp_str = cmp_str - cmp_tf + 1;
-		cmp_tf = 0;
+		if (ft_memcmp(ptr, s2, length) == 0)
+			return (ptr);
+		ptr++;
 	}
-	return (NULL);
+	if (!*s1 && !*s2)
+		return (ptr);
+	return (0);
 }

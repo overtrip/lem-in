@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 19:49:23 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/06 19:49:57 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 17:04:35 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/03 18:54:45 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	char	to_find;
+	int		i;
 
+	to_find = (char)c;
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		if (s[i] == (char)c)
-			return ((char*)(s + i));
+		if (s[i] == to_find)
+			return ((char *)&s[i]);
 		i++;
 	}
-	if (s[i] == '\0' && s[i] == (char)c)
-		return ((char*)(s + i));
-	return (NULL);
+	if (to_find == '\0')
+		return ((char *)&s[i]);
+	else
+		return (NULL);
 }

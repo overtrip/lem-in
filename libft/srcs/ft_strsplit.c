@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 18:29:58 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 13:13:57 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/26 11:54:21 by jlinden           #+#    #+#             */
+/*   Updated: 2015/06/09 16:26:38 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 static int	ft_issep(char c, char sep)
@@ -27,8 +28,8 @@ static int	ft_num_substr(char const *str, char c)
 	while (str[i])
 	{
 		if (!ft_issep(str[i], c) && (i == 0 || ft_issep(str[i - 1], c)))
-			++num_str;
-		++i;
+			num_str++;
+		i++;
 	}
 	return (num_str);
 }
@@ -56,7 +57,7 @@ static void	ft_put_words(char const *s, char **tab, char c)
 			begin = NULL;
 			end = NULL;
 		}
-		++i;
+		i++;
 	}
 }
 
@@ -65,7 +66,7 @@ char		**ft_strsplit(char const *s, char c)
 	char	**tab;
 	int		num_str;
 
-	if (!s || !c)
+	if (!(s && c))
 		return (NULL);
 	num_str = ft_num_substr(s, c);
 	if (!(tab = (char **)malloc(sizeof(char *) * (num_str + 1))))

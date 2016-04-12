@@ -1,36 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 18:27:57 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/05 18:46:49 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/21 18:27:35 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/08 18:51:03 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+#include "libft.h"
+
+static int	ft_isspace(char c)
 {
-	int	i;
-	int	s;
-	int	nb;
+	if (c == 32 || (c >= 9 && c <= 13))
+		return (1);
+	else
+		return (0);
+}
+
+int			ft_atoi(const char *str)
+{
+	int		i;
+	char	mult;
+	int		result;
 
 	i = 0;
-	s = 1;
-	nb = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	result = 0;
+	mult = 1;
+	while (ft_isspace(str[i]))
 		i++;
-	if ((str[i] == '-' || str[i] == '+') && str[i] != '\0')
+	if ((str[i] == '-') || (str[i] == '+'))
 	{
 		if (str[i] == '-')
-			s = -1;
+			mult = -1;
 		i++;
 	}
-	while ((str[i] >= '0' && str[i] <= '9') && str[i] != '\0')
+	while (ft_isdigit(str[i]))
 	{
-		nb = nb * 10 + (str[i] - 48);
+		result = (result * 10) + (str[i] - '0');
 		i++;
 	}
-	return (s * nb);
+	return (mult * result);
 }

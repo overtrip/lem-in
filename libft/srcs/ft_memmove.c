@@ -3,31 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 15:47:50 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/06 19:48:31 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/21 14:26:11 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:36:03 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t len)
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	char	*copy;
-	char	*p1;
-	size_t	i;
+	char		*saveptr1;
+	const char	*saveptr2;
 
-	copy = (char *)malloc(sizeof(char *) * len);
-	p1 = (char *)dest;
-	i = 0;
-	while (i <= len)
+	saveptr1 = (char *)s1;
+	saveptr2 = (const char *)s2;
+	if (saveptr1 <= saveptr2)
+		ft_memcpy(s1, s2, n);
+	else
 	{
-		copy[i] = ((char *)src)[i];
-		i++;
+		saveptr1 += n - 1;
+		saveptr2 += n - 1;
+		while (n--)
+		{
+			*saveptr1 = *saveptr2;
+			saveptr1--;
+			saveptr2--;
+		}
 	}
-	while (len--)
-		p1[len] = copy[len];
-	return (dest);
+	return (s1);
 }

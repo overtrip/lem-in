@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 14:37:55 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 19:42:27 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 11:37:24 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/27 11:55:43 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strequ(char const *s1, char const *s2)
-{
-	int	cmp;
+#include "libft.h"
 
-	cmp = 0;
-	if (!(s1 && s2))
+int		ft_strequ(char const *s1, char const *s2)
+{
+	if (s1 && s2)
+		return (ft_strcmp(s1, s2) == 0);
+	else
 		return (0);
-	while (s1[cmp] == s2[cmp] && (s1[cmp] != '\0' || s2[cmp] != '\0'))
-		cmp++;
-	if (s1[cmp] == s2[cmp])
-		return (1);
-	return (0);
 }

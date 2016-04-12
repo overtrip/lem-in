@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/12 15:49:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/12 18:21:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void			ft_get_map(t_list **map, char *buff)
 	if (buff[0] == '#' && buff[1] != '#')
 		return ;
 	ft_list_push_back(map, ft_create_elem(buff));
+//	free(buff);
 }
 
 static t_list		*ft_val(char *str, t_list *map)
@@ -89,15 +90,21 @@ static void			ft_linker(t_list *map)
 	save = map;
 	while (map != tube)
 	{
+//	ft_putendl(map->data);
 		ft_find_room(map, save, tube);
 		map = map->next;
 	}
+/*	while (map){
+	ft_putendl(map->data);
+	map = map->next;
+	}*/
 }
 
 int					main(void)
 {
 	t_list	*map;
 	char	*buff;
+//	t_chain	*network;
 
 	buff = NULL;
 	map = NULL;
@@ -105,8 +112,8 @@ int					main(void)
 		ft_get_map(&map, buff);
 	ft_error(map);
 	ft_linker(map->next);
-	ft_find_way(map);
-//	ft_resolver(map);
+//	network = ft_find_way(map);
+//	ft_resolver(network);
 //	ft_display_link(map);
 	ft_putlist(map);
 	return (0);

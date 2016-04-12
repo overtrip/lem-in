@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2016/04/08 16:59:05 by jealonso         ###   ########.fr        #
+#    Updated: 2016/04/12 18:11:50 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,8 @@ SRCS = \
 	ft_isalpha.c \
 	ft_isascii.c \
 	ft_isdigit.c \
-	ft_islower.c \
 	ft_isnumber.c \
 	ft_isprint.c \
-	ft_isupper.c \
 	ft_itoa.c \
 	ft_lst_push_back.c \
 	ft_lstadd.c \
@@ -53,13 +51,11 @@ SRCS = \
 	ft_memset.c \
 	ft_putchar.c \
 	ft_putchar_fd.c \
-	ft_putchar_l.c \
 	ft_putendl.c \
 	ft_putendl_fd.c \
 	ft_putlist.c \
 	ft_putnbr.c \
 	ft_putnbr_fd.c \
-	ft_putnbr_long.c \
 	ft_putstr.c \
 	ft_putstr_fd.c \
 	ft_strcat.c \
@@ -89,8 +85,6 @@ SRCS = \
 	ft_strstr.c \
 	ft_strsub.c \
 	ft_strtrim.c \
-	ft_swap.c \
-	ft_swap_str.c \
 	ft_tolower.c \
 	ft_toupper.c \
 	get_next_line.c

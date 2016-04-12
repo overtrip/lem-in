@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/03/30 17:28:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/12 18:21:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_cut_str(char *str, char c)
 	if (str)
 		ptr = ft_strchr(str, c);
 	if (ptr)
-		return (++ptr);
+		return (ft_strdup(++ptr));
 	else
 		return (ptr);
 }

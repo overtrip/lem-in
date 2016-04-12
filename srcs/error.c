@@ -6,29 +6,35 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 16:04:41 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/05 14:22:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/12 16:47:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+static void		ft_check_name(char *str)
+{
+	if (*str == 'L')
+	{
+		ft_putendl("Name room begin by a \'L\'");
+		exit(0);
+	}
+}
+
 static void		ft_prerequis(t_list *map)
 {
 	int	flag;
 	int	secu;
-	int	l_name;
 
 	flag = 0;
 	secu = 0;
-	l_name = 0;
 	while (map)
 	{
-		if (ft_strstr(map->data, "##start") && ++secu && flag == 0)
+		if (ft_strequ(map->data, "##start") && ++secu && flag == 0)
 			++flag;
-		if (ft_strstr(map->data, "##end") && ++secu && flag == 1)
+		if (ft_strequ(map->data, "##end") && ++secu && flag == 1)
 			++flag;
-		if (((char *)(map->data))[0] == 'L')
-			l_name = 1;
+		ft_check_name(map->data);
 		map = map->next;
 	}
 	if (flag == 0)
@@ -37,8 +43,6 @@ static void		ft_prerequis(t_list *map)
 		ft_putendl("Pas de end");
 	else if (secu > 2)
 		ft_putendl("multiples start et/ou end");
-	if (l_name == 1)
-		ft_putendl("Name room beagin to \'L\'");
 }
 
 static void		ft_tube(t_list *map)

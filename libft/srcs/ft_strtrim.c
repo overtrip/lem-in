@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/09 14:59:01 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/25 16:20:17 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/25 19:49:26 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/30 19:49:47 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+static int	ft_iswhitespace(char c)
 {
-	char	*newmem;
-	char	*tmp;
-	char	*pend;
-	size_t	i;
+	if (c == 32 || c == '\n' || c == '\t')
+		return (1);
+	else
+		return (0);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	size_t			length;
+	char			*new;
+	unsigned int	i;
 
 	if (!s)
 		return (NULL);
-	tmp = ft_strnew(ft_strlen(s));
-	pend = (char *)s + (ft_strlen(s) - 1);
 	i = 0;
-	while (*s == ' ' || *s == '\n' || *s == '\t')
-		s++;
-	while (*pend == ' ' || *pend == '\n' || *pend == '\t')
-		pend--;
-	while (s <= pend)
-	{
-		tmp[i] = *s;
+	length = ft_strlen(s);
+	while (s[i] && ft_iswhitespace(s[i]))
 		i++;
-		s++;
-	}
-	tmp[i] = '\0';
-	newmem = ft_strnew(ft_strlen(tmp));
-	ft_strcpy(newmem, tmp);
-	ft_strdel(&tmp);
-	return (newmem);
+	while (length > i && ft_iswhitespace(s[length - 1]))
+		length--;
+	new = ft_strsub(s, i, length - i);
+	return (new);
 }

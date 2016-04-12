@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 15:54:43 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/26 18:02:12 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 11:58:08 by jlinden           #+#    #+#             */
+/*   Updated: 2015/06/09 15:00:23 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
@@ -26,5 +27,5 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	if (n > 9)
 		ft_putnbr_fd(n / 10, fd);
-	ft_putchar_fd(n % 10 + 48, fd);
+	ft_putchar_fd('0' + (n % 10), fd);
 }

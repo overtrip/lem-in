@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 15:52:33 by jealonso          #+#    #+#             */
-/*   Updated: 2016/02/03 17:02:54 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 11:48:40 by jlinden           #+#    #+#             */
+/*   Updated: 2016/04/12 17:59:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	ft_putendl(char const *s)
 {
-	int	cmp;
-
-	cmp = ft_strlen(s);
-	if (!s)
-		return (0);
-	write(1, s, cmp);
+	ft_putstr(s);
 	ft_putchar('\n');
-	return (++cmp);
+	return (1);
 }

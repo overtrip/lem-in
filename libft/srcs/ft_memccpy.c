@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 17:02:05 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/05 16:07:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 15:48:07 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:35:49 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
 void	*ft_memccpy(void *s1, const void *s2, int c, size_t n)

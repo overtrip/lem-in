@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 18:27:09 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/04 15:54:42 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/25 18:40:17 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:45:00 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 static size_t	num_digits(long n)

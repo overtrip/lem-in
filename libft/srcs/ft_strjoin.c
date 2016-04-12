@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 12:04:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/02 14:38:56 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/25 18:24:12 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/28 17:37:05 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *final;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*result;
 
-	if (!(s1))
+	if (!(s1 && s2))
 		return (NULL);
-	if (!s2)
-		return (ft_strdup(s1));
-	if ((final = (ft_strnew((ft_strlen(s1)) + (ft_strlen(s2))))))
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	result = ft_strnew(s1_len + s2_len);
+	if (result)
 	{
-		ft_strcpy(final, (char *)s1);
-		ft_strcat(final, (char *)s2);
-		return (final);
+		ft_memcpy(result, s1, s1_len);
+		ft_memcpy(result + s1_len, s2, s2_len);
 	}
-	return (NULL);
+	return (result);
 }
