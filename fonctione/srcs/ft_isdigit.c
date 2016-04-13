@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/19 14:19:05 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/21 11:53:55 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+int		ft_isdigit(int c)
 {
-	char	*str;
-	size_t	s1_len;
-
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
-	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
-	}
+	if (c >= 48 && c <= 57)
+		return (1);
 	else
-		str = NULL;
-	return (str);
+		return (0);
 }

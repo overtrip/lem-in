@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/30 16:23:53 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:00:56 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*current;
+	t_list	*temp;
 	t_list	*save;
+	t_list	*save_current;
 
-	if (alst)
+	save = NULL;
+	current = lst;
+	while (current)
 	{
-		current = *alst;
-		while (current)
+		if (!(temp = ft_lstnew(current->content, current->content_size)))
+			return (NULL);
+		temp = f(temp);
+		if (!save)
 		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
+			save = temp;
+			save_current = save;
 		}
-		*alst = NULL;
+		else
+		{
+			save_current->next = temp;
+			save_current = save_current->next;
+		}
+		current = current->next;
 	}
+	return (save);
 }

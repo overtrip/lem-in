@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 15:48:07 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:35:49 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
-#include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+void	*ft_memccpy(void *s1, const void *s2, int c, size_t n)
 {
-	t_list	*current;
-	t_list	*save;
+	unsigned char		*s1ptr;
+	const unsigned char	*s2ptr;
 
-	if (alst)
+	s1ptr = (unsigned char *)s1;
+	s2ptr = (const unsigned char *)s2;
+	while (n--)
 	{
-		current = *alst;
-		while (current)
-		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
-		}
-		*alst = NULL;
+		*s1ptr = *s2ptr;
+		s1ptr++;
+		if (*s2ptr == (unsigned char)c)
+			return (s1ptr);
+		s2ptr++;
 	}
+	return (NULL);
 }

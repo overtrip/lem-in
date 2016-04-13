@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2016/04/13 17:22:23 by jealonso         ###   ########.fr        #
+#    Updated: 2016/04/13 15:41:58 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,7 @@ SRCS = \
 	ft_isprint.c \
 	ft_isupper.c \
 	ft_itoa.c \
-	ft_lstdel.c	\
 	ft_lst_push_back.c \
-	ft_lstadd.c \
 	ft_memalloc.c \
 	ft_memccpy.c \
 	ft_memchr.c \
@@ -94,7 +92,7 @@ SRCS = \
 	ft_swap_str.c \
 	ft_tolower.c \
 	ft_toupper.c \
-	get_next_line.c
+	get_next_line.c \
 
 CFLAGS = -Wall -Werror -Wextra -O3 -I $(INCPATH)
 

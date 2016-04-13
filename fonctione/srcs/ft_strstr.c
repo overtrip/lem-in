@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/21 16:50:25 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:39:33 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <string.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	char	*str;
-	size_t	s1_len;
+	size_t	length;
+	char	*ptr;
 
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
+	length = ft_strlen(s2);
+	ptr = (char *)s1;
+	while (*ptr)
 	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
+		if (ft_memcmp(ptr, s2, length) == 0)
+			return (ptr);
+		ptr++;
 	}
-	else
-		str = NULL;
-	return (str);
+	if (!*s1 && !*s2)
+		return (ptr);
+	return (0);
 }

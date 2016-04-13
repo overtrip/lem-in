@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 10:54:27 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:36:37 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_list	*current;
-	t_list	*save;
+	const unsigned char	*s1ptr;
+	const unsigned char	*s2ptr;
 
-	if (alst)
+	s1ptr = (const unsigned char *)s1;
+	s2ptr = (const unsigned char *)s2;
+	while (n--)
 	{
-		current = *alst;
-		while (current)
-		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
-		}
-		*alst = NULL;
+		if (*s1ptr != *s2ptr)
+			return (*s1ptr - *s2ptr);
+		s1ptr++;
+		s2ptr++;
 	}
+	return (0);
 }

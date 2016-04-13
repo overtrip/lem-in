@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 10:06:04 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/27 11:51:40 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_list	*current;
-	t_list	*save;
+	char			*result_str;
+	unsigned int	i;
 
-	if (alst)
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	result_str = ft_strnew(ft_strlen(s) + 1);
+	if (result_str)
 	{
-		current = *alst;
-		while (current)
+		while (s[i])
 		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
+			result_str[i] = f(i, s[i]);
+			i++;
 		}
-		*alst = NULL;
 	}
+	return (result_str);
 }

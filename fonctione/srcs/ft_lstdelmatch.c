@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelmatch.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2014/02/15 19:15:09 by jlinden           #+#    #+#             */
+/*   Updated: 2014/02/16 13:00:20 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
-void	ft_lstdel(t_list **alst)
+t_list	*ft_lstdelmatch(t_list **alst, void *data, int (*cmp)(void*, void*))
 {
-	t_list	*current;
-	t_list	*save;
+	t_list	*ret;
 
-	if (alst)
+	if (!*alst)
+		return (NULL);
+	ret = ft_lstdelmatch(&((*alst)->next), data, cmp);
+	if (cmp((*alst)->content, data))
 	{
-		current = *alst;
-		while (current)
-		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
-		}
-		*alst = NULL;
+		free((*alst)->content);
+		free(*alst);
+		*alst = ret;
+		return (ret);
+	}
+	else
+	{
+		(*alst)->next = ret;
+		return (*alst);
 	}
 }

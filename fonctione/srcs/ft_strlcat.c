@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/22 17:53:53 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/08 18:50:44 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
-#include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	t_list	*current;
-	t_list	*save;
+	size_t	dst_len;
+	size_t	src_len;
+	char	*dst_end;
 
-	if (alst)
-	{
-		current = *alst;
-		while (current)
-		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
-		}
-		*alst = NULL;
-	}
+	src_len = ft_strlen(src);
+	dst_end = ft_memchr(dst, '\0', size);
+	if (!dst_end)
+		return (size + src_len);
+	dst_len = dst_end - dst;
+	if (!ft_memccpy(dst_end, src, 0, size - dst_len - 1))
+		dst[size - 1] = '\0';
+	return (dst_len + src_len);
 }

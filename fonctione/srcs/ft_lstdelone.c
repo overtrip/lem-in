@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/30 14:00:22 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/30 15:13:03 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 {
-	char	*str;
-	size_t	s1_len;
-
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
+	if (alst)
 	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
+		del((*alst)->content, (*alst)->content_size);
+		free(*alst);
+		*alst = NULL;
 	}
-	else
-		str = NULL;
-	return (str);
 }

@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstpush.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2014/02/15 17:01:20 by jlinden           #+#    #+#             */
+/*   Updated: 2014/02/15 17:10:38 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_lstpush(t_list **alst, t_list *new)
 {
-	char	*str;
-	size_t	s1_len;
+	t_list	*cursor;
 
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
+	cursor = *alst;
+	if (alst)
 	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
+		if (*alst && new)
+		{
+			while (cursor->next)
+				cursor = cursor->next;
+			cursor->next = new;
+		}
+		else
+			*alst = new;
 	}
-	else
-		str = NULL;
-	return (str);
 }

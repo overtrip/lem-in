@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/19 12:36:35 by jlinden           #+#    #+#             */
+/*   Updated: 2013/11/25 11:35:00 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <string.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strncpy(char *s1, const char *s2, size_t n)
 {
-	char	*str;
-	size_t	s1_len;
+	char	*result;
 
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
+	result = s1;
+	if (!n)
+		return (result);
+	while ((*s1 = *s2))
 	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
+		n--;
+		if (!n)
+			return (result);
+		s1++;
+		s2++;
 	}
-	else
-		str = NULL;
-	return (str);
+	while (n--)
+	{
+		*s1 = '\0';
+		s1++;
+	}
+	return (result);
 }

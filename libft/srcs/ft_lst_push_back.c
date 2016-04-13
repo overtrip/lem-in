@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 15:28:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 14:52:01 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/13 17:22:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	ft_list_push_back(t_list **list, t_list *new)
 {
-	t_list	*begin;
+	t_list	*tmp;
 
-	begin = (*list);
+	tmp = *list;
 	if (*list)
 	{
-		while ((*list)->next)
-			*list = (*list)->next;
-		(*list)->next = new;
-		(*list) = begin;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 	else
-		(*list) = new;
+		*list = new;
 }

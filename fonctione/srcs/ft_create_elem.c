@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2015/11/26 15:31:50 by jealonso          #+#    #+#             */
+/*   Updated: 2016/04/12 17:33:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+t_list	*ft_create_elem(char *data)
 {
-	char	*str;
-	size_t	s1_len;
+	t_list	*new;
+	int		i;
 
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
-	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
-	}
-	else
-		str = NULL;
-	return (str);
+	i = 0;
+	if (!(new = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	new->data = ft_strdup(data);
+	new->next = NULL;
+	if (!(new->link = (t_list **)malloc(sizeof(t_list *) * 5)))
+		return (NULL);
+	new->nb_malloc = 5;
+	while (i <= 5)
+		new->link[i++] = NULL;
+	new->i = 0;
+	new->presence = 0;
+	return (new);
 }

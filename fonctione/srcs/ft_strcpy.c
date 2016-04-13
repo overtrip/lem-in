@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2014/11/06 20:02:25 by jealonso          #+#    #+#             */
+/*   Updated: 2014/11/10 11:55:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <string.h>
-#include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strcpy(char *dest, char *src)
 {
-	char	*str;
-	size_t	s1_len;
+	int cmp;
 
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
+	cmp = 0;
+	while (src[cmp] != '\0')
 	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
+		dest[cmp] = src[cmp];
+		cmp++;
 	}
-	else
-		str = NULL;
-	return (str);
+	dest[cmp] = '\0';
+	return (dest);
 }

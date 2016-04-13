@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/21 14:26:11 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:36:03 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
-#include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	t_list	*current;
-	t_list	*save;
+	char		*saveptr1;
+	const char	*saveptr2;
 
-	if (alst)
+	saveptr1 = (char *)s1;
+	saveptr2 = (const char *)s2;
+	if (saveptr1 <= saveptr2)
+		ft_memcpy(s1, s2, n);
+	else
 	{
-		current = *alst;
-		while (current)
+		saveptr1 += n - 1;
+		saveptr2 += n - 1;
+		while (n--)
 		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
+			*saveptr1 = *saveptr2;
+			saveptr1--;
+			saveptr2--;
 		}
-		*alst = NULL;
 	}
+	return (s1);
 }

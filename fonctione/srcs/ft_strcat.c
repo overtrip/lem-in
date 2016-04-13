@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/13 16:16:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 16:21:38 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/20 14:11:35 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 14:15:08 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	char	*str;
-	size_t	s1_len;
+	int		s1_size;
+	int		i;
 
-	s1_len = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (str)
+	s1_size = ft_strlen(s1);
+	i = 0;
+	while (s2[i])
 	{
-		str = ft_strcpy(str, s1);
-		str[s1_len] = '\0';
+		s1[s1_size + i] = s2[i];
+		i++;
 	}
-	else
-		str = NULL;
-	return (str);
+	s1[s1_size + i] = '\0';
+	return (s1);
 }

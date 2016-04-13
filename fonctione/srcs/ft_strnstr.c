@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlinden <jlinden@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/30 15:23:31 by jlinden           #+#    #+#             */
-/*   Updated: 2016/04/13 17:25:48 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/24 14:48:41 by jlinden           #+#    #+#             */
+/*   Updated: 2013/12/01 19:39:53 by jlinden          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
-#include <stdlib.h>
 
-void	ft_lstdel(t_list **alst)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	t_list	*current;
-	t_list	*save;
+	size_t	i;
+	size_t	j;
 
-	if (alst)
+	i = 0;
+	if (!*s2)
+		return ((char *)s1);
+	while (s1[i] && i < n)
 	{
-		current = *alst;
-		while (current)
+		j = 0;
+		while (s1[i + j] == s2[j] && s1[i + j] && s2[j] && (i + j) < n)
 		{
-			if (current->data)
-				free(current->data);
-			if (current->link)
-				free(current->link);
-			save = current;
-			current = current->next;
-			free(save);
+			if (!s2[j + 1])
+				return (&((char*)s1)[i]);
+			j++;
 		}
-		*alst = NULL;
+		i++;
 	}
+	return (NULL);
 }

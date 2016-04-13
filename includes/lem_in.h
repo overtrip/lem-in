@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/12 15:53:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/13 18:25:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct			s_chain
 	t_list				*data;
 }						t_chain;
 
-void					ft_error(t_list *map);
+int						ft_error(t_list **map);
 char					*ft_begin_str(char *str, char c);
 char					*ft_cut_str(char *str, char c);
 t_list					*find_tube(t_list *map);

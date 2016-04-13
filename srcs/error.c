@@ -1,79 +1,64 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/01 16:04:41 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/12 16:47:54 by jealonso         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem_in.h"
 
-static void		ft_check_name(char *str)
+int		ft_limit(int *limit, char *str, char *str2)
 {
-	if (*str == 'L')
+	if (ft_strequ(str, str2))
+		++limit;
+	if (*limit > 1)
 	{
-		ft_putendl("Name room begin by a \'L\'");
-		exit(0);
+		ft_putstr("Multiple ");
+		ft_putendl(str2);
+		return (1);
 	}
+	return (0);
 }
 
-static void		ft_prerequis(t_list *map)
+int		ft_check_ant(int *alert, char *ant)
 {
-	int	flag;
-	int	secu;
-
-	flag = 0;
-	secu = 0;
-	while (map)
+	if (!ft_isnumber(ant))
 	{
-		if (ft_strequ(map->data, "##start") && ++secu && flag == 0)
-			++flag;
-		if (ft_strequ(map->data, "##end") && ++secu && flag == 1)
-			++flag;
-		ft_check_name(map->data);
-		map = map->next;
+		ft_putendl("They are no ants");
+		++(*alert);
+		return (1);
 	}
-	if (flag == 0)
-		ft_putendl("Pas de start et/ou end");
-	else if (flag == 1)
-		ft_putendl("Pas de end");
-	else if (secu > 2)
-		ft_putendl("multiples start et/ou end");
+	return (0);
 }
 
-static void		ft_tube(t_list *map)
+void	ft_name(t_list *map, int *alert)
 {
-	t_list	*control;
-	t_list	*begin;
-	int		find;
+	int start;
+	int	end;
 
-	begin = find_tube(map);
-	while (map && !ft_strequ(map->data, begin->data))
+	start = 0;
+	end = 0;
+	if (!ft_check_ant(alert, map->data))
 	{
-		find = 0;
-		if (((char *)(map->data))[0] == '#' && map->next)
-			map = map->next;
-		control = begin;
-		while (control)
+		while (map)
 		{
-			if (ft_pile_face(map->data, control->data) && ++find)
-				break ;
-			control = control->next;
+			if (ft_limit(&start, map->data, "##start") ||
+					ft_limit(&end, map->data, "##end"))
+				++(*alert);
+			if (((char *)(map->data))[0] == 'L' && (++alert))
+				ft_putendl("Room name begin by a 'L'");
+			map = map->next;
 		}
-		if (find == 0 && ft_putendl("room not linked"))
-			break ;
-		map = map->next;
+		//TODO checke si cest bien start OU end
+		if (!(start || end))
+		{
+			if (!start)
+				ft_putendl("They are no ##start");
+			else
+				ft_putendl("They are no ##end");
+		}
 	}
 }
 
-void			ft_error(t_list *map)
+//pas de link
+int		ft_error(t_list **map)
 {
-	if (!ft_isnumber(map->data))
-		ft_putendl("pas de fourmis");
-	ft_prerequis(map);
-	ft_tube(map->next);
+	int	alert;
+
+	alert = 0;
+	ft_name(*map, &alert);
+	return (alert);
 }
