@@ -83,25 +83,25 @@ static void			ft_get_map(t_list **map, char *buff)
 //	}
 //}
 
-//static void			ft_linker(t_list *map)
-//{
-//	t_list	*tube;
-//	t_list	*save;
-//
-//	tube = find_tube(map);
-//	save = map;
-//	while (map != tube)
-//	{
-////	ft_putendl(map->data);
-//		ft_find_room(map, save, tube);
-//		map = map->next;
-//	}
-///*	while (map){
-//	ft_putendl(map->data);
-//	map = map->next;
-//	}*/
-//}
-//
+static void			ft_find_room(t_list *map)
+{
+
+}
+
+static void			ft_linker(t_list *map)
+{
+	t_list	*tube;
+	t_list	*save;
+
+	tube = find_tube(map);
+	save = map;
+	while (map != tube)
+	{
+		ft_find_room(map, save, tube);
+		map = map->next;
+	}
+}
+
 int					main(void)
 {
 	t_list	*map;

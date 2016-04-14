@@ -17,6 +17,16 @@
 # include <stdio.h>
 # define SIZE 5
 
+typedef struct			s_room
+{
+	char				*data;
+	struct s_room		**link;
+	int					x;
+	int					y;
+	int					nb_malloc;
+	int					presence;
+}						t_room;
+
 typedef struct			s_chain
 {
 	size_t				len;
