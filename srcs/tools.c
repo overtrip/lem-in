@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/12 18:21:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/14 18:26:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	*find_tube(t_list *map)
 	begin_tube = NULL;
 	while (map)
 	{
-		if (ft_strchr(map->data, '-'))
+		if ((ft_strchr(map->data, '-')))
 		{
 			begin_tube = map;
 			break ;
@@ -55,20 +55,30 @@ t_list	*find_tube(t_list *map)
 	return (begin_tube);
 }
 
+void	ft_clean(char *begin,char *droite, char *gauche)
+{
+	free(begin);
+	free(droite);
+	free(gauche);
+}
+
 int		ft_pile_face(char *str1, char *str2)
 {
+	int		ret;
 	char	*begin;
 	char	*droite;
 	char	*gauche;
 
+	ret = 0;
 	begin = ft_begin_str(str1, ' ');
 	droite = ft_cut_str(str2, '-');
 	gauche = ft_begin_str(str2, '-');
 	if (ft_strequ(begin, droite))
-		return (1);
+		ret = 1;
 	if (ft_strequ(begin, gauche))
-		return (2);
-	return (0);
+		ret = 2;
+	ft_clean(droite, gauche, begin);
+	return (ret);
 }
 
 void	ft_config_room(t_list **map, int *flag)
