@@ -81,14 +81,47 @@ int		ft_pile_face(char *str1, char *str2)
 	return (ret);
 }
 
-void	ft_config_room(t_list **map, int *flag)
+void	ft_initlink(t_room **new)
 {
-	--flag;
-	if (ft_strequ((*map)->data, "##start"))
-	{
-		*map = (*map)->next;
-		(*map)->i = 1;
-	}
-	if (ft_strequ((*map)->data, "##end"))
-		(*map)->i = 2;
+	int	i;
+
+	i = 0;
+	(*new)->nb_malloc = 5;
+	while (i < (*new)->nb_malloc)
+		(*new)->link[i++] = NULL;
 }
+
+void	ft_getint(t_room **new)
+{
+	//TODO DO THIS FUNCTION
+}
+
+t_room	*ft_create_room(char *data, int *alert)
+{
+	t_room	*new;
+
+	if (!(new = (t_room *)malloc(sizeof(t_map))))
+		return (NULL);
+	new->data = ft_strdup(data);
+	if (!(new->link = (t_room **)malloc(sizeof(t_room *) * 5)))
+	{
+		free(new);
+		return (NULL);
+	}
+	ft_getint(*new);
+	ft_initlink(*new);
+	new->presence = 0;
+	return (new);
+}
+//
+//void	ft_config_room(t_list **map, int *flag)
+//{
+//	--flag;
+//	if (ft_strequ((*map)->data, "##start"))
+//	{
+//		*map = (*map)->next;
+//		(*map)->i = 1;
+//	}
+//	if (ft_strequ((*map)->data, "##end"))
+//		(*map)->i = 2;
+//}

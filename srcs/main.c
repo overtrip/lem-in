@@ -34,7 +34,7 @@ void				ft_display_link(t_list *map)
 	}
 }
 
-static void			ft_get_map(t_list **map, char *buff)
+static void			ft_get_map(t_room **map, char *buff)
 {
 	t_list	*tmp;
 
@@ -42,8 +42,9 @@ static void			ft_get_map(t_list **map, char *buff)
 		return ;
 	if (buff[0] == '#' && buff[1] != '#')
 		return ;
-	if ((tmp = ft_create_elem(buff)))
+	if ((tmp = ft_create_room(buff)))
 		ft_list_push_back(map, tmp);
+	ft_minierror(tmp, buff);
 }
 
 //static t_list		*ft_val(char *str, t_list *map)
@@ -104,7 +105,7 @@ static void			ft_linker(t_list *map)
 
 int					main(void)
 {
-	t_list	*map;
+	t_room	*map;
 	char	*buff;
 //	t_chain	*network;
 
