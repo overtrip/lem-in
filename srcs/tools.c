@@ -104,18 +104,32 @@ void	ft_getint(t_room *new, char *data, int *alert)
 	char	*begin;
 	char	*end;
 
-	begin = ft_strchr(data, ' ');
+	begin = ft_cut_str(data, ' ');
 	if (!begin)
 		ft_msg_coo(alert, 0);
-	end = ft_strchr(begin, ' ');
+	end = ft_cut_str(begin, ' ');
 	if (!end)
 		ft_msg_coo(alert, 'Y');
-	begin = ft_strndup(begin, begin - end);
+	begin = ft_begin_str(begin, ' ');
 	if (ft_isnumber(begin))
 		new->x = ft_atoi(begin);
 	if (ft_isnumber(end))
 		new->y = ft_atoi(end);
 	free(begin);
+	free(end);
+}
+
+void	specail_case(t_room *new, t_list *tmp, int *alert)
+{
+	if (ft_strequ(tmp->data, "##start"))
+		new->s_e = 1;
+	else
+		new->s_e = 2;
+	ft_getint(new, tmp->next->data, alert);
+	ft_initlink(new);
+	new->next = NULL;
+	new->presence = 0;
+	new->data = ft_begin_str(tmp->next->data, ' ');
 }
 
 t_room	*ft_create_room(t_list *tmp, int *alert)
@@ -129,19 +143,16 @@ t_room	*ft_create_room(t_list *tmp, int *alert)
 		free(new);
 		return (NULL);
 	}
-	ft_getint(new, tmp->data, alert);
-	ft_initlink(new);
-	new->next = NULL;
-	new->presence = 0;
-	if (ft_strequ(tmp->data, "##end") || ft_strequ(tmp->data, "##start"))
-	{
-		if (ft_strequ(tmp->data, "##start"))
-			new->s_e = 1;
-		else
-			new->s_e = 2;
-		new->data = ft_begin_str(tmp->next->data, ' ');
-	}
+	if (!(ft_strequ(tmp->data, "##end") || ft_strequ(tmp->data, "##start")))
+		specail_case(new, tmp->next, alert);
 	else
+	{
+		ft_getint(new, tmp->data, alert);
+		ft_initlink(new);
+		new->next = NULL;
+		new->presence = 0;
 		new->data = ft_begin_str(tmp->data, ' ');
+	}
+	printf("ca passe la\n");
 	return (new);
 }

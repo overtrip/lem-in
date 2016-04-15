@@ -32,14 +32,14 @@ void				ft_display_link(t_room *map)
 	}
 }
 
-static void			ft_push_room_back(t_room **map, t_room *new)
+void			ft_push_room_back(t_room **map, t_room *new)
 {
 	t_room	*begin;
 
 	begin = *map;
-	if (map)
+	if (*map)
 	{
-		while ((*map)->next)
+		while (*map)
 			*map = (*map)->next;
 		(*map)->next = new;
 		*map = begin;
@@ -48,7 +48,7 @@ static void			ft_push_room_back(t_room **map, t_room *new)
 		*map = new;
 }
 
-static void			ft_get_map(t_list **map, char *buff)
+void			ft_get_map(t_list **map, char *buff)
 {
 	t_list	*tmp;
 	int		alert;
@@ -62,7 +62,7 @@ static void			ft_get_map(t_list **map, char *buff)
 		ft_list_push_back(map, tmp);
 }
 
-static t_room		*ft_val(char *str, t_room *map)
+t_room		*ft_val(char *str, t_room *map)
 {
 	while (map)
 	{
@@ -73,7 +73,7 @@ static t_room		*ft_val(char *str, t_room *map)
 	return (NULL);
 }
 
-static void			ft_find_room(t_room *map, t_room *begin, t_list *tube)
+void			ft_find_room(t_room *map, t_room *begin, t_list *tube)
 {
 	char	*room;
 	t_room	*tmp;
@@ -95,7 +95,7 @@ static void			ft_find_room(t_room *map, t_room *begin, t_list *tube)
 	free(room);
 }
 
-static void			ft_linker(t_room *map, t_room *begin, t_list	*tube)
+void			ft_linker(t_room *map, t_room *begin, t_list	*tube)
 {
 	while (map)
 	{
@@ -104,7 +104,7 @@ static void			ft_linker(t_room *map, t_room *begin, t_list	*tube)
 	}
 }
 
-static void			ft_transfer(t_room **room, t_list *map)
+void			ft_transfer(t_room **room, t_list *map)
 {
 	t_list	*tube;
 	t_room	*begin;
@@ -115,7 +115,8 @@ static void			ft_transfer(t_room **room, t_list *map)
 	tube = find_tube(map);
 	while (map != tube)
 	{
-		ft_push_room_back(room, ft_create_room(map->data, &alert));
+	printf("[%s]\n", map->data);
+		ft_push_room_back(room, ft_create_room(map, &alert));
 		if (alert)
 			ft_putendl("werhklwefjklhrwlikbgr");
 		map = map->next;
@@ -141,11 +142,11 @@ int					main(void)
 	free(buff);
 	if (!ft_error(map))
 	{
-	ft_transfer(&room, map);
+	ft_transfer(&room, map->next);
 //	network = ft_find_way(map);
 //	ft_resolver(network);
-	ft_display_link(room);
-//	ft_putlist(map);
+//	ft_display_link(room);
+	ft_putlist(map);
 	}
 	ft_lstdel(&map);
 	return (0);
