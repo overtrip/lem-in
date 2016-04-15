@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/14 18:36:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/15 16:47:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ static void	ft_link(t_list *map, int *alert)
 		++(*alert);
 }
 
-int		ft_error(t_list **map)
+int		ft_error(t_list *map)
 {
 	int	alert;
 
 	alert = 0;
-	ft_name(*map, &alert);
-	ft_link(*map, &alert);
+	ft_name(map, &alert);
+	ft_link(map, &alert);
 	return (alert);
 }

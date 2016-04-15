@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/14 18:26:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/15 18:14:12 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_list	*find_tube(t_list *map)
 	return (begin_tube);
 }
 
-void	ft_clean(char *begin,char *droite, char *gauche)
+void	ft_clean(char *begin, char *droite, char *gauche)
 {
 	free(begin);
 	free(droite);
@@ -81,47 +81,67 @@ int		ft_pile_face(char *str1, char *str2)
 	return (ret);
 }
 
-void	ft_initlink(t_room **new)
+void	ft_initlink(t_room *new)
 {
 	int	i;
 
 	i = 0;
-	(*new)->nb_malloc = 5;
-	while (i < (*new)->nb_malloc)
-		(*new)->link[i++] = NULL;
+	new->nb_malloc = 5;
+	while (i < new->nb_malloc)
+		new->link[i++] = NULL;
 }
 
-void	ft_getint(t_room **new)
+void	ft_msg_coo(int *alert, char c)
 {
-	//TODO DO THIS FUNCTION
+	ft_putstr("They are no ");
+	ft_putchar(c);
+	ft_putendl(" coordonne");
+	++(*alert);
 }
 
-t_room	*ft_create_room(char *data, int *alert)
+void	ft_getint(t_room *new, char *data, int *alert)
+{
+	char	*begin;
+	char	*end;
+
+	begin = ft_strchr(data, ' ');
+	if (!begin)
+		ft_msg_coo(alert, 0);
+	end = ft_strchr(begin, ' ');
+	if (!end)
+		ft_msg_coo(alert, 'Y');
+	begin = ft_strndup(begin, begin - end);
+	if (ft_isnumber(begin))
+		new->x = ft_atoi(begin);
+	if (ft_isnumber(end))
+		new->y = ft_atoi(end);
+	free(begin);
+}
+
+t_room	*ft_create_room(t_list *tmp, int *alert)
 {
 	t_room	*new;
 
-	if (!(new = (t_room *)malloc(sizeof(t_map))))
+	if (!(new = (t_room *)malloc(sizeof(t_room))))
 		return (NULL);
-	new->data = ft_strdup(data);
 	if (!(new->link = (t_room **)malloc(sizeof(t_room *) * 5)))
 	{
 		free(new);
 		return (NULL);
 	}
-	ft_getint(*new);
-	ft_initlink(*new);
+	ft_getint(new, tmp->data, alert);
+	ft_initlink(new);
+	new->next = NULL;
 	new->presence = 0;
+	if (ft_strequ(tmp->data, "##end") || ft_strequ(tmp->data, "##start"))
+	{
+		if (ft_strequ(tmp->data, "##start"))
+			new->s_e = 1;
+		else
+			new->s_e = 2;
+		new->data = ft_begin_str(tmp->next->data, ' ');
+	}
+	else
+		new->data = ft_begin_str(tmp->data, ' ');
 	return (new);
 }
-//
-//void	ft_config_room(t_list **map, int *flag)
-//{
-//	--flag;
-//	if (ft_strequ((*map)->data, "##start"))
-//	{
-//		*map = (*map)->next;
-//		(*map)->i = 1;
-//	}
-//	if (ft_strequ((*map)->data, "##end"))
-//		(*map)->i = 2;
-//}

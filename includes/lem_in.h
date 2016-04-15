@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/13 18:25:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/15 18:14:09 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct			s_room
 {
 	char				*data;
 	struct s_room		**link;
+	struct s_room		*next;
+	int					s_e;
 	int					x;
 	int					y;
 	int					nb_malloc;
@@ -35,19 +37,20 @@ typedef struct			s_chain
 	t_list				*data;
 }						t_chain;
 
-int						ft_error(t_list **map);
+int						ft_error(t_list *map);
 char					*ft_begin_str(char *str, char c);
 char					*ft_cut_str(char *str, char c);
 t_list					*find_tube(t_list *map);
 int						ft_pile_face(char *str1, char *str2);
 void					ft_config_room(t_list **map, int *flag);
-void					ft_add_room(t_list *map, t_list *room);
+void					ft_add_room(t_room *map, t_room *room);
 void					ft_new_way(t_chain **network, t_chain *old);
 t_chain					*ft_create_chain(t_list *tmp);
 void					ft_chain_push_back(t_chain **begin, t_chain *new);
 t_chain					*ft_find_way(t_list *map);
 void					ft_clear_null(t_list *map);
+t_room					*ft_create_room(t_list *data, int *alert);
 
-void					ft_display_link(t_list *map);
+void					ft_display_link(t_room *map);
 
 #endif

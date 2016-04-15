@@ -6,22 +6,22 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 15:57:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/03/31 17:47:49 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/15 18:05:13 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_list		*ft_realloc_room(t_list **map)
+static t_room		*ft_realloc_room(t_room **map)
 {
-	t_list	*tmp;
-	t_list	*begin;
+	t_room	*tmp;
+	t_room	*begin;
 	int		nb;
 
 	nb = -1;
-	if (!(tmp = (t_list *)malloc(sizeof(t_list))))
+	if (!(tmp = (t_room *)malloc(sizeof(t_room))))
 		return (NULL);
-	if (!(tmp->link = (t_list **)malloc(sizeof(t_list *) *
+	if (!(tmp->link = (t_room **)malloc(sizeof(t_room *) *
 					((*map)->nb_malloc + 5))))
 		return (NULL);
 	(*map)->nb_malloc += 5;
@@ -37,7 +37,7 @@ static t_list		*ft_realloc_room(t_list **map)
 	return (*tmp->link);
 }
 
-static void			ft_check_malloc(t_list *map)
+static void			ft_check_malloc(t_room *map)
 {
 	int		nb;
 	int		i;
@@ -50,7 +50,7 @@ static void			ft_check_malloc(t_list *map)
 		*map->link = ft_realloc_room(map->link);
 }
 
-void				ft_add_room(t_list *map, t_list *room)
+void				ft_add_room(t_room *map, t_room *room)
 {
 	int		i;
 
