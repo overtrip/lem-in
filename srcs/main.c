@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/15 18:14:17 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/18 18:19:47 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,28 @@ void				ft_display_link(t_room *map)
 		while (++i <= map->nb_malloc)
 			if (map->link[i])
 				printf("[%p](map)\t[%s](map->data)\t[%s](%d)(map->link)\n",
-					map, map->data,
-					map->link[i]->data, i);
+						map, map->data,
+						map->link[i]->data, i);
 		map = map->next;
 	}
 }
 
-void			ft_push_room_back(t_room **map, t_room *new)
+static void			ft_push_room_back(t_room **map, t_room *new)
 {
 	t_room	*begin;
 
 	begin = *map;
 	if (*map)
 	{
-		while (*map)
-			*map = (*map)->next;
-		(*map)->next = new;
-		*map = begin;
+		while (begin->next)
+			begin = begin->next;
+		begin->next = new;
 	}
 	else
 		*map = new;
 }
 
-void			ft_get_map(t_list **map, char *buff)
+static void			ft_get_map(t_list **map, char *buff)
 {
 	t_list	*tmp;
 	int		alert;
@@ -62,7 +61,7 @@ void			ft_get_map(t_list **map, char *buff)
 		ft_list_push_back(map, tmp);
 }
 
-t_room		*ft_val(char *str, t_room *map)
+static t_room		*ft_val(char *str, t_room *map)
 {
 	while (map)
 	{
@@ -73,38 +72,36 @@ t_room		*ft_val(char *str, t_room *map)
 	return (NULL);
 }
 
-void			ft_find_room(t_room *map, t_room *begin, t_list *tube)
+static void			ft_linker(t_room **map, t_room *begin, t_list *tube)
 {
 	char	*room;
 	t_room	*tmp;
 	int		val;
 
-	room = ft_strdup(map->data);
-	while (tube)
+	room = ft_strdup((*map)->data);
+	while (*map)
 	{
-		if ((val = ft_pile_face(room, tube->data)))
+		while (tube)
 		{
-			if (val == 2)
-				tmp = ft_val(ft_cut_str(tube->data, '-'), begin);
-			else
-				tmp = ft_val(ft_begin_str(tube->data, '-'), begin);
-			ft_add_room(map, tmp);
+			if (!(((char *)(tube->data))[0] == '#'))
+			{
+				if ((val = ft_pile_face(room, tube->data)))
+				{
+					if (val == 2)
+						tmp = ft_val(ft_cut_str(tube->data, '-'), begin);
+					else
+						tmp = ft_val(ft_begin_str(tube->data, '-'), begin);
+					ft_add_room(map, tmp);
+				}
+			}
+			tube = tube->next;
 		}
-		tube = tube->next;
+		(*map) = (*map)->next;
 	}
 	free(room);
 }
 
-void			ft_linker(t_room *map, t_room *begin, t_list	*tube)
-{
-	while (map)
-	{
-		ft_find_room(map, begin, tube);
-		map = map->next;
-	}
-}
-
-void			ft_transfer(t_room **room, t_list *map)
+static int			ft_transfer(t_room **room, t_list *map)
 {
 	t_list	*tube;
 	t_room	*begin;
@@ -115,13 +112,18 @@ void			ft_transfer(t_room **room, t_list *map)
 	tube = find_tube(map);
 	while (map != tube)
 	{
-	printf("[%s]\n", map->data);
-		ft_push_room_back(room, ft_create_room(map, &alert));
+		if (!(((char *)(map->data))[0] == '#' &&
+					((char *)(map->data))[1] != '#'))
+			ft_push_room_back(room, ft_create_room(&map, &alert));
 		if (alert)
-			ft_putendl("werhklwefjklhrwlikbgr");
+		{
+			ft_putendl("Problem detected");
+			return (alert);
+		}
 		map = map->next;
 	}
-	ft_linker(*room, begin, tube);
+	ft_linker(room, begin, tube);
+	return (alert);
 }
 
 int					main(void)
@@ -142,11 +144,11 @@ int					main(void)
 	free(buff);
 	if (!ft_error(map))
 	{
-	ft_transfer(&room, map->next);
-//	network = ft_find_way(map);
-//	ft_resolver(network);
-//	ft_display_link(room);
-	ft_putlist(map);
+		ft_transfer(&room, map->next);
+		//	network = ft_find_way(map);
+		//	ft_resolver(network);
+		ft_display_link(room);
+		//		ft_putlist(map);
 	}
 	ft_lstdel(&map);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/15 18:14:12 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/18 15:33:33 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,21 @@ void	ft_getint(t_room *new, char *data, int *alert)
 	free(end);
 }
 
-void	specail_case(t_room *new, t_list *tmp, int *alert)
+void	specail_case(t_room *new, t_list **tmp, int *alert)
 {
-	if (ft_strequ(tmp->data, "##start"))
+	if (ft_strequ((*tmp)->data, "##start"))
 		new->s_e = 1;
 	else
 		new->s_e = 2;
-	ft_getint(new, tmp->next->data, alert);
+	(*tmp) = (*tmp)->next;
+	ft_getint(new, (*tmp)->data, alert);
 	ft_initlink(new);
 	new->next = NULL;
 	new->presence = 0;
-	new->data = ft_begin_str(tmp->next->data, ' ');
+	new->data = ft_begin_str((*tmp)->data, ' ');
 }
 
-t_room	*ft_create_room(t_list *tmp, int *alert)
+t_room	*ft_create_room(t_list **tmp, int *alert)
 {
 	t_room	*new;
 
@@ -143,16 +144,16 @@ t_room	*ft_create_room(t_list *tmp, int *alert)
 		free(new);
 		return (NULL);
 	}
-	if (!(ft_strequ(tmp->data, "##end") || ft_strequ(tmp->data, "##start")))
-		specail_case(new, tmp->next, alert);
+	if ((ft_strequ((*tmp)->data, "##end") ||
+				ft_strequ((*tmp)->data, "##start")))
+		specail_case(new, tmp, alert);
 	else
 	{
-		ft_getint(new, tmp->data, alert);
+		ft_getint(new, (*tmp)->data, alert);
 		ft_initlink(new);
 		new->next = NULL;
 		new->presence = 0;
-		new->data = ft_begin_str(tmp->data, ' ');
+		new->data = ft_begin_str((*tmp)->data, ' ');
 	}
-	printf("ca passe la\n");
 	return (new);
 }

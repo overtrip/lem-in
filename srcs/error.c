@@ -6,13 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/15 16:47:44 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/18 15:35:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		ft_limit(int *limit, char *str, char *str2)
+static int	ft_limit(int *limit, char *str, char *str2)
 {
 	if (ft_strequ(str, str2))
 		++(*limit);
@@ -25,7 +25,7 @@ static int		ft_limit(int *limit, char *str, char *str2)
 	return (0);
 }
 
-static int		ft_check_ant(int *alert, char *ant)
+static int	ft_check_ant(int *alert, char *ant)
 {
 	if (!ft_isnumber(ant))
 	{
@@ -95,7 +95,7 @@ static void	ft_link(t_list *map, int *alert)
 		++(*alert);
 }
 
-int		ft_error(t_list *map)
+int			ft_error(t_list *map)
 {
 	int	alert;
 

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 15:57:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/15 18:05:13 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/18 15:27:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static void			ft_check_malloc(t_room *map)
 		*map->link = ft_realloc_room(map->link);
 }
 
-void				ft_add_room(t_room *map, t_room *room)
+void				ft_add_room(t_room **map, t_room *room)
 {
 	int		i;
 
 	i = 0;
-	ft_check_malloc(map);
-	while (map->link[i])
+	ft_check_malloc(*map);
+	while ((*map)->link[i])
 		++i;
-	map->link[i] = room;
+	(*map)->link[i] = room;
 }
