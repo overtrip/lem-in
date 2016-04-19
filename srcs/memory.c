@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 15:57:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/18 15:27:07 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/19 16:25:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_room		*ft_realloc_room(t_room **map)
 			tmp->link[nb] = NULL;
 	}
 	*tmp->link = begin;
+//	printf("-----( %d )-----\n", nb);
 	return (*tmp->link);
 }
 
@@ -47,7 +48,10 @@ static void			ft_check_malloc(t_room *map)
 	while (++i < map->nb_malloc && map->link[i])
 		++nb;
 	if (nb >= map->nb_malloc)
+	{
 		*map->link = ft_realloc_room(map->link);
+//	printf("-----( %d )-----\n", map->nb_malloc);
+	}
 }
 
 void				ft_add_room(t_room **map, t_room *room)
@@ -59,4 +63,24 @@ void				ft_add_room(t_room **map, t_room *room)
 	while ((*map)->link[i])
 		++i;
 	(*map)->link[i] = room;
+}
+
+void				ft_delete_room(t_room **room)
+{
+	t_room	*tmp;
+	int		i;
+
+	while ((*room))
+	{
+		tmp = (*room);
+		*room = (*room)->next;
+		i = -1;
+		while (++i < tmp->nb_malloc)
+		{
+			if (tmp->link[i])
+				free(tmp->link[i]);
+		}
+		free(tmp->data);
+		free(tmp);
+	}
 }

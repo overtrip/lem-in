@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/18 15:35:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/19 14:50:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,29 @@ static void	ft_name(t_list *map, int *alert)
 	}
 }
 
+static void	ft_print_error(int find, int *alert)
+{
+	if (!find)
+	{
+		ft_putendl("map not linked");
+		++(*alert);
+	}
+}
+
+static int	ft_check_link(t_list *control, t_list *map, int *find)
+{
+	char	*tmp;
+
+	tmp = ft_begin_str(map->data, ' ');
+	if (!(((char *)(control->data))[0] == '#'))
+	{
+		if (ft_pile_face(tmp, control->data) && ++*find)
+			return (1);
+	}
+	free(tmp);
+	return (0);
+}
+
 static void	ft_link(t_list *map, int *alert)
 {
 	t_list	*tube;
@@ -80,19 +103,21 @@ static void	ft_link(t_list *map, int *alert)
 	while (map != tube)
 	{
 		find = 0;
-		control = map;
-		while (control)
+		control = tube;
+		if (!(((char *)(map->data))[0] == '#'))
 		{
-			if (ft_pile_face(map->data, control->data) && ++find)
+			while (control)
+			{
+				if (ft_check_link(control, map, &find))
+					break ;
+				control = control->next;
+			}
+			if (!find)
 				break ;
-			control = control->next;
 		}
-		if (!find)
-			break ;
 		map = map->next;
 	}
-	if (!find)
-		++(*alert);
+	ft_print_error(find, alert);
 }
 
 int			ft_error(t_list *map)

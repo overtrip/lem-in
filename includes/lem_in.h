@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/18 15:27:30 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:13:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void					ft_chain_push_back(t_chain **begin, t_chain *new);
 t_chain					*ft_find_way(t_list *map);
 void					ft_clear_null(t_list *map);
 t_room					*ft_create_room(t_list **data, int *alert);
+void					ft_delete_room(t_room **room);
 
 void					ft_display_link(t_room *map);
 

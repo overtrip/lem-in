@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/18 18:19:47 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/19 16:25:11 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ void				ft_display_link(t_room *map)
 				printf("[%p](map)\t[%s](map->data)\t[%s](%d)(map->link)\n",
 						map, map->data,
 						map->link[i]->data, i);
+		map = map->next;
+	}
+}
+
+/*
+**				TODO DELETE THIS FUNCTION
+*/
+
+void				ft_put_room(t_room *map)
+{
+	int	i;
+
+	while (map)
+	{
+		i = -1;
+		while (++i < map->nb_malloc)
+			if (map->link[i])
+			printf("[%s](room)\t[%s](son link)\n", map->data, map->link[i]->data);
+//		printf("-----( %d )-----\n", i);
 		map = map->next;
 	}
 }
@@ -55,8 +74,8 @@ static void			ft_get_map(t_list **map, char *buff)
 	alert = 0;
 	if (!buff)
 		return ;
-	if (buff[0] == '#' && buff[1] != '#')
-		return ;
+	/*if (buff[0] == '#' && buff[1] != '#')
+		return ;*/
 	if ((tmp = ft_create_elem(buff)))
 		ft_list_push_back(map, tmp);
 }
@@ -74,18 +93,18 @@ static t_room		*ft_val(char *str, t_room *map)
 
 static void			ft_linker(t_room **map, t_room *begin, t_list *tube)
 {
-	char	*room;
 	t_room	*tmp;
+	t_list	*begin_tube;
 	int		val;
 
-	room = ft_strdup((*map)->data);
+	begin_tube = tube;
 	while (*map)
 	{
 		while (tube)
 		{
 			if (!(((char *)(tube->data))[0] == '#'))
 			{
-				if ((val = ft_pile_face(room, tube->data)))
+				if ((val = ft_pile_face((*map)->data, tube->data)))
 				{
 					if (val == 2)
 						tmp = ft_val(ft_cut_str(tube->data, '-'), begin);
@@ -96,9 +115,10 @@ static void			ft_linker(t_room **map, t_room *begin, t_list *tube)
 			}
 			tube = tube->next;
 		}
+		tube = begin_tube;
 		(*map) = (*map)->next;
 	}
-	free(room);
+	*map = begin;
 }
 
 static int			ft_transfer(t_room **room, t_list *map)
@@ -108,7 +128,6 @@ static int			ft_transfer(t_room **room, t_list *map)
 	int		alert;
 
 	alert = 0;
-	begin = *room;
 	tube = find_tube(map);
 	while (map != tube)
 	{
@@ -122,6 +141,7 @@ static int			ft_transfer(t_room **room, t_list *map)
 		}
 		map = map->next;
 	}
+	begin = *room;
 	ft_linker(room, begin, tube);
 	return (alert);
 }
@@ -142,14 +162,15 @@ int					main(void)
 		free(buff);
 	}
 	free(buff);
-	if (!ft_error(map))
+	if (!ft_error(map) && !ft_transfer(&room, map->next))
 	{
-		ft_transfer(&room, map->next);
 		//	network = ft_find_way(map);
 		//	ft_resolver(network);
-		ft_display_link(room);
-		//		ft_putlist(map);
+		//ft_display_link(room);
+		//ft_putlist(map);
+//		ft_put_room(room);
 	}
 	ft_lstdel(&map);
+//	ft_delete_room(&room);
 	return (0);
 }
