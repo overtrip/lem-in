@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/08 16:26:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/10 17:25:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:38:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_new_way(t_chain **network, t_chain *old)
 	ft_sort_chain(network, new);
 }
 
-t_chain	*ft_create_chain(t_list *map)
+t_chain	*ft_create_chain(t_room *map)
 {
 	t_chain	*new;
 

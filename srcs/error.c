@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/19 14:50:14 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:07:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ static int	ft_check_link(t_list *control, t_list *map, int *find)
 	if (!(((char *)(control->data))[0] == '#'))
 	{
 		if (ft_pile_face(tmp, control->data) && ++*find)
+		{
+			free(tmp);
 			return (1);
+		}
 	}
 	free(tmp);
 	return (0);

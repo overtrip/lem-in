@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2016/04/13 17:22:23 by jealonso         ###   ########.fr        #
+#    Updated: 2016/04/20 17:47:27 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ SRCS = \
 	ft_toupper.c \
 	get_next_line.c
 
-CFLAGS = -Wall -Werror -Wextra -O3 -I $(INCPATH)
+CFLAGS = -Wall -Werror -Wextra -O0 -g -I $(INCPATH)
 
 COBJS =  $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
 

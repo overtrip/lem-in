@@ -6,36 +6,30 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 15:57:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/19 16:25:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/20 18:34:16 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_room		*ft_realloc_room(t_room **map)
+static void			ft_realloc_room(t_room *map)
 {
-	t_room	*tmp;
-	t_room	*begin;
+	t_room	**link;
 	int		nb;
 
-	nb = -1;
-	if (!(tmp = (t_room *)malloc(sizeof(t_room))))
-		return (NULL);
-	if (!(tmp->link = (t_room **)malloc(sizeof(t_room *) *
-					((*map)->nb_malloc + 5))))
-		return (NULL);
-	(*map)->nb_malloc += 5;
-	begin = *tmp->link;
-	while (tmp->link[++nb])
+	nb = 0;
+	if (!(link = (t_room **)malloc(sizeof(t_room *) *
+					(map->nb_malloc + 5))))
+		return ;
+	ft_bzero(link, sizeof(t_room *) * (map->nb_malloc + 5));
+	while (nb < map->nb_malloc)
 	{
-		if ((*map)->link[nb])
-			tmp->link[nb] = (*map)->link[nb];
-		else
-			tmp->link[nb] = NULL;
+		link[nb] = map->link[nb];
+		++nb;
 	}
-	*tmp->link = begin;
-//	printf("-----( %d )-----\n", nb);
-	return (*tmp->link);
+	map->nb_malloc += 5;
+	free(map->link);
+	map->link = link;
 }
 
 static void			ft_check_malloc(t_room *map)
@@ -48,10 +42,7 @@ static void			ft_check_malloc(t_room *map)
 	while (++i < map->nb_malloc && map->link[i])
 		++nb;
 	if (nb >= map->nb_malloc)
-	{
-		*map->link = ft_realloc_room(map->link);
-//	printf("-----( %d )-----\n", map->nb_malloc);
-	}
+		ft_realloc_room(map);
 }
 
 void				ft_add_room(t_room **map, t_room *room)
@@ -68,19 +59,21 @@ void				ft_add_room(t_room **map, t_room *room)
 void				ft_delete_room(t_room **room)
 {
 	t_room	*tmp;
-	int		i;
+	t_room	*current;
 
-	while ((*room))
+	if  (room)
 	{
-		tmp = (*room);
-		*room = (*room)->next;
-		i = -1;
-		while (++i < tmp->nb_malloc)
+		current = *room;
+		while (current)
 		{
-			if (tmp->link[i])
-				free(tmp->link[i]);
+			if (current->link)
+				free(current->link);
+			if (current->data)
+				free(current->data);
+			tmp = current;
+			current = current->next;
+			free(tmp);
 		}
-		free(tmp->data);
-		free(tmp);
+		*room = NULL;
 	}
 }

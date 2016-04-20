@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/19 16:25:16 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:01:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	ft_getint(t_room *new, char *data, int *alert)
 {
 	char	*begin;
 	char	*end;
+	char	*new_begin;
 
 	begin = ft_cut_str(data, ' ');
 	if (!begin)
@@ -111,12 +112,13 @@ void	ft_getint(t_room *new, char *data, int *alert)
 	end = ft_cut_str(begin, ' ');
 	if (!end)
 		ft_msg_coo(alert, 'Y');
-	begin = ft_begin_str(begin, ' ');
-	if (ft_isnumber(begin))
-		new->x = ft_atoi(begin);
+	new_begin = ft_begin_str(begin, ' ');
+	if (ft_isnumber(new_begin))
+		new->x = ft_atoi(new_begin);
 	if (ft_isnumber(end))
 		new->y = ft_atoi(end);
 	free(begin);
+	free(new_begin);
 	free(end);
 }
 

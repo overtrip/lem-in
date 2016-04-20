@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/04/08 16:49:56 by jealonso         ###   ########.fr        #
+#    Updated: 2016/04/20 17:46:53 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ LIBFT		= $(LFTPATH)/libft.a
 
 #FLAGS:
 LDFLAGS		= -L $(LFTPATH) -lft
-CFLAGS		= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror -g -O0
 PATHLIB		= -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 
 #EXECUTALE:
@@ -59,7 +59,7 @@ HEAD	= $(patsubst %.h, $(INCPATH)/%.h, $(HFILES))
 all: $(LIBFT) $(OBJSPATH) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) -g3 $(CFLAGS) $(LDFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 $(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HEAD)
 	@$(CC) -c $(CFLAGS) $(PATHLIB) -o $@ $<
