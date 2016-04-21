@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 14:44:45 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/20 16:01:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/21 15:42:19 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ t_room	*ft_create_room(t_list **tmp, int *alert)
 	{
 		ft_getint(new, (*tmp)->data, alert);
 		ft_initlink(new);
+		new->s_e = 0;
 		new->next = NULL;
 		new->presence = 0;
 		new->data = ft_begin_str((*tmp)->data, ' ');

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/20 17:26:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/21 17:44:15 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void			ft_see_way(t_chain *way)
 
 static t_room	*find_start(t_room *map, int nb)
 {
-	while (map)
-	{
-		if (map->s_e == nb)
-			return (map);
-		map = map->next;
-	}
+	if (map)
+		while (map)
+		{
+			if (map->s_e == nb)
+				return (map);
+			map = map->next;
+		}
 	return (NULL);
 }
 
@@ -104,39 +105,6 @@ t_chain			*ft_find_way(t_room *map)
 	start = find_start(map, 1);
 	end = find_start(map, 2);
 	ft_solver(start, end, &way, &network);
-//	ft_see_way(network);
+	ft_see_way(network);
 	return (way);
-}
-
-void	ft_delet_network(t_chain **network)
-{
-	t_chain	*current;
-	t_chain	*save;
-	t_chain	*save_intern;
-
-	if (network)
-	{
-		current = *network;
-		while (current)
-		{
-			if (current->chain)
-			{
-				while (current->chain)
-				{
-					if (current->chain->data)
-						free(current->chain->data);
-					save_intern = current->chain;
-					current->chain = current->chain->next;
-					free(save_intern);
-				}
-				free(current->chain);
-			}
-			if (current->data)
-				free(current->data);
-			save = current;
-			current = current->next;
-			free(save);
-		}
-		*network = NULL;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/20 18:34:18 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/21 17:34:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,12 @@ int					main(void)
 	t_list	*map;
 	t_room	*room;
 	char	*buff;
-//	t_chain	*network;
+	t_chain	*network;
 
 	buff = NULL;
 	map = NULL;
 	room = NULL;
-//	network = NULL;
+	network = NULL;
 	while (get_next_line(0, &buff) > 0)
 	{
 		ft_get_map(&map, buff);
@@ -169,7 +169,7 @@ int					main(void)
 	free(buff);
 	if (!ft_error(map) && !ft_transfer(&room, map->next))
 	{
-		//	network = ft_find_way(room);
+			network = ft_find_way(room);
 		//	ft_resolver(network);
 //		ft_display_link(room);
 //		ft_putlist(map);
@@ -177,6 +177,6 @@ int					main(void)
 	}
 	ft_lstdel(&map);
 	ft_delete_room(&room);
-//	ft_delet_network(&network);
+	ft_delet_network(&network);
 	return (0);
 }

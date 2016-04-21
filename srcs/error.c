@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/20 16:07:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/21 17:40:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	ft_check_link(t_list *control, t_list *map, int *find)
 	tmp = ft_begin_str(map->data, ' ');
 	if (!(((char *)(control->data))[0] == '#'))
 	{
-		if (ft_pile_face(tmp, control->data) && ++*find)
+		if (ft_pile_face(tmp, control->data) && (++(*find)))
 		{
 			free(tmp);
 			return (1);
@@ -129,6 +129,6 @@ int			ft_error(t_list *map)
 
 	alert = 0;
 	ft_name(map, &alert);
-	ft_link(map, &alert);
+	ft_link(map->next, &alert);
 	return (alert);
 }
