@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/21 17:44:15 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:29:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,27 @@ void			ft_see_way(t_chain *way)
 
 static t_room	*find_start(t_room *map, int nb)
 {
-	if (map)
-		while (map)
-		{
-			if (map->s_e == nb)
-				return (map);
-			map = map->next;
-		}
+	while (map)
+	{
+		if (map->s_e == nb)
+			return (map);
+		map = map->next;
+	}
 	return (NULL);
+}
+
+static void			ft_delete_way(t_chain **way)
+{
+	t_chain	*tmp;
+
+	while (*way)
+	{
+		tmp = (*way);
+		free((*way)->chain);
+		(*way) = (*way)->next;
+		free(tmp);
+	}
+	*way = NULL;
 }
 
 static void		ft_chain_pop_back(t_chain **way)
@@ -54,10 +67,7 @@ static void		ft_chain_pop_back(t_chain **way)
 	if (!*way)
 		return ;
 	else if (!temp->chain)
-	{
-		free(*way);
-		*way = NULL;
-	}
+		ft_delete_way(way);
 	else
 	{
 		while (temp->chain->chain)
@@ -105,6 +115,7 @@ t_chain			*ft_find_way(t_room *map)
 	start = find_start(map, 1);
 	end = find_start(map, 2);
 	ft_solver(start, end, &way, &network);
+	//ft_delete_way(&way);
 	ft_see_way(network);
-	return (way);
+	return (network);
 }

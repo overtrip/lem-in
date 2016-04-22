@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/08 16:26:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/21 17:44:12 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/22 17:50:35 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,31 +92,23 @@ void	ft_delet_network(t_chain **network)
 {
 	t_chain	*current;
 	t_chain	*save;
-//	t_chain	*save_intern;
+	t_chain	*save_intern;
 
 	if (network)
 	{
 		current = *network;
 		while (current)
 		{
-			if (current->chain)
+			while (current->chain)
 			{
-/*				while (current->chain)
-				{
-					if (current->chain->data)
-						free(current->chain->data);
-					save_intern = current->chain;
-					current->chain = current->chain->next;
-					free(save_intern);
-				}*/
-				free(current->chain);
+				save_intern = current->chain;
+				current->chain = current->chain->next;
+				free(save_intern);
 			}
-			if (current->data)
-				free(current->data);
 			save = current;
 			current = current->next;
 			free(save);
 		}
-		*network = NULL;
 	}
+	*network = NULL;
 }
