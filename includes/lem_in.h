@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/22 17:50:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/23 16:54:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct			s_room
 typedef struct			s_chain
 {
 	size_t				len;
+	size_t				weight;
 	struct s_chain		*chain;
 	struct s_chain		*next;
 	t_room				*data;

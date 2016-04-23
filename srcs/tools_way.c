@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/08 16:26:00 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/22 17:50:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/23 16:55:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_chain	*ft_create_chain(t_room *map)
 	else
 	{
 		new->len = 0;
+		new->weight = 0;
 		new->chain = NULL;
 		new->next = NULL;
 		new->data = map;
