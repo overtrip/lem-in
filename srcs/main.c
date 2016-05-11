@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/22 17:50:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/04/26 15:55:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int					main(void)
 			network = ft_find_way(room);
 		//	ft_resolver(network);
 //		ft_display_link(room);
-//		ft_putlist(map);
+		ft_putlist(map);
 //		ft_put_room(room);
 	}
 	ft_lstdel(&map);
