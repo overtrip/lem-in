@@ -6,50 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/17 18:29:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:56:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*
-**				TODO DELETE THIS FUNCTION
-*/
-
-void				ft_display_link(t_room *map)
-{
-	int		i;
-
-	while (map)
-	{
-		i = -1;
-		while (++i <= map->nb_malloc)
-			if (map->link[i])
-				printf("[%p](map)\t[%s](map->data)\t[%s](%d)(map->link)\n",
-						map, map->data,
-						map->link[i]->data, i);
-		map = map->next;
-	}
-}
-
-/*
-**				TODO DELETE THIS FUNCTION
-*/
-
-void				ft_put_room(t_room *map)
-{
-	int	i;
-
-	while (map)
-	{
-		i = -1;
-		while (++i < map->nb_malloc)
-			if (map->link[i])
-			printf("[%s](room)\t[%s](son link)\n", map->data, map->link[i]->data);
-//		printf("-----( %d )-----\n", i);
-		map = map->next;
-	}
-}
 
 static void			ft_push_room_back(t_room **map, t_room *new)
 {
@@ -107,7 +68,6 @@ static void			ft_linker(t_room **map, t_room *begin, t_list *tube)
 		while (tube)
 		{
 			if (!(((char *)(tube->data))[0] == '#'))
-			{
 				if ((val = ft_pile_face((*map)->data, tube->data)))
 				{
 					if (val == 2)
@@ -116,7 +76,6 @@ static void			ft_linker(t_room **map, t_room *begin, t_list *tube)
 						tmp = ft_val(ft_begin_str(tube->data, '-'), begin);
 					ft_add_room(map, tmp);
 				}
-			}
 			tube = tube->next;
 		}
 		tube = begin_tube;
@@ -169,11 +128,8 @@ int					main(void)
 	free(buff);
 	if (!ft_error(map) && !ft_transfer(&room, map->next))
 	{
-			network = ft_find_way(room);
-		//	ft_resolver(network);
-//		ft_display_link(room);
-//		ft_putlist(map);
-//		ft_put_room(room);
+		network = ft_find_way(room);
+		ft_resolver(network, map);
 	}
 	ft_lstdel(&map);
 	ft_delete_room(&room);

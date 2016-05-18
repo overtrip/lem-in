@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/04/20 17:46:53 by jealonso         ###   ########.fr        #
+#    Updated: 2016/05/18 17:46:54 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,11 @@ SRCS 		= \
 			error.c \
 			main.c \
 			memory.c \
+			print_msg.c \
 			research.c \
+			solution.c \
 			tools.c \
+			tools_research.c \
 			tools_way.c \
 
 #OBJ:

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 15:57:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/20 18:34:16 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:58:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				ft_delete_room(t_room **room)
 	t_room	*tmp;
 	t_room	*current;
 
-	if  (room)
+	if (room)
 	{
 		current = *room;
 		while (current)

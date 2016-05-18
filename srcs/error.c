@@ -6,24 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/04/21 17:40:17 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:02:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static int	ft_limit(int *limit, char *str, char *str2)
-{
-	if (ft_strequ(str, str2))
-		++(*limit);
-	if (*limit > 1)
-	{
-		ft_putstr("Multiple ");
-		ft_putendl(str2);
-		return (1);
-	}
-	return (0);
-}
 
 static int	ft_check_ant(int *alert, char *ant)
 {
@@ -34,14 +21,6 @@ static int	ft_check_ant(int *alert, char *ant)
 		return (1);
 	}
 	return (0);
-}
-
-static void	ft_putmsg(int start)
-{
-	if (!start)
-		ft_putendl("They are no ##start");
-	else
-		ft_putendl("They are no ##end");
 }
 
 static void	ft_name(t_list *map, int *alert)
@@ -67,15 +46,6 @@ static void	ft_name(t_list *map, int *alert)
 		}
 		if (!(start && end))
 			ft_putmsg(start);
-	}
-}
-
-static void	ft_print_error(int find, int *alert)
-{
-	if (!find)
-	{
-		ft_putendl("map not linked");
-		++(*alert);
 	}
 }
 
