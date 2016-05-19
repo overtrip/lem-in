@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/18 17:56:25 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/19 17:50:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void					ft_print_error(int find, int *alert);
 void					ft_putmsg(int start);
 int						ft_limit(int *limit, char *str, char *str2);
 void					clear_presence(t_chain *way);
-void					ft_resolver(t_chain *network, t_list *map);
+void					ft_resolver(t_chain **network, int nb_ants, t_room *map);
+t_room					*find_start(t_room *map, int nb);
+void					print_ant(t_chain *network);
+t_room					*find_start(t_room *map, int nb);
 
 void					ft_display_link(t_room *map);
 

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/18 17:42:26 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/19 17:54:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			ft_see_way(t_chain *way)
 	}
 }
 
-static t_room	*find_start(t_room *map, int nb)
+t_room	*find_start(t_room *map, int nb)
 {
 	while (map)
 	{

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/18 17:56:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/19 17:53:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int					main(void)
 	if (!ft_error(map) && !ft_transfer(&room, map->next))
 	{
 		network = ft_find_way(room);
-		ft_resolver(network, map);
+		ft_resolver(&network, ft_atoi(map->data), room);
 	}
 	ft_lstdel(&map);
 	ft_delete_room(&room);
