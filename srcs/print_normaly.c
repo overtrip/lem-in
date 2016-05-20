@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   print_normaly.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 17:08:12 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 19:38:39 by jealonso         ###   ########.fr       */
+/*   Created: 2016/05/20 16:05:11 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:15:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+void	normal_execution(t_list *map, t_room *room, t_chain *network)
 {
-	char	*str;
-	char	*save;
-
-	if (!(s && f))
-		return (NULL);
-	if ((str = ft_strnew(ft_strlen(s))) && f)
+	network = ft_find_way(room);
+	if (network)
 	{
-		save = str;
-		while (*s)
-		{
-			*str = f(*s);
-			s++;
-			str++;
-		}
-		return (save);
+		ft_putlist(map);
+	ft_putchar('\n');
+		ft_resolver(&network, ft_atoi(map->data), room);
 	}
-	return (NULL);
 }

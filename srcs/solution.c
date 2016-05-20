@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solution.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/20 15:16:22 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 16:04:30 by jealonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-static	void	print_stats(t_chain	*network)
+static void		print_stats(t_chain *network)
 {
 	while (network)
 	{
@@ -16,7 +28,7 @@ static void		one_step(t_chain *network)
 	if (network->chain)
 		one_step(network->chain);
 	if (network->data->presence)
- 	{
+	{
 		network->chain->data->presence = network->data->presence;
 		network->data->presence = 0;
 	}
@@ -42,6 +54,8 @@ void			ft_resolver(t_chain **network, int nb_ants, t_room *map)
 	end = find_start(map, 2);
 	while (ants <= nb_ants)
 	{
+		if (its_impossible(*network))
+			return ;
 		one_step(*network);
 		if (!((*network)->data->presence))
 			(*network)->data->presence = ants;

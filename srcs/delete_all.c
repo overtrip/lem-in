@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*   delete_all.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 15:23:37 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 19:37:27 by jealonso         ###   ########.fr       */
+/*   Created: 2016/05/20 15:52:05 by jealonso          #+#    #+#             */
+/*   Updated: 2016/05/20 15:56:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_striter(char *s, void (*f)(char *))
+#include "lem_in.h"
+
+void	delete_all(t_list **map, t_room **room, t_chain **network)
 {
-	if (!(s && f))
-		return ;
-	while (*s)
-	{
-		f(s);
-		s++;
-	}
+	ft_lstdel(map);
+	ft_delete_room(room);
+	ft_delet_network(network);
 }

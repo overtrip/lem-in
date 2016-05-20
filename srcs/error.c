@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:36:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/19 18:00:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/20 14:10:11 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	ft_name(t_list *map, int *alert)
 					ft_limit(&end, map->data, "##end"))
 			{
 				++(*alert);
-				break ;
+				return ;
 			}
-			if (((char *)(map->data))[0] == 'L' && (++*alert))
+			else if (((char *)(map->data))[0] == 'L' && ++(*alert))
 			{
 				ft_putendl("Room name begin by a 'L'");
 				return ;
@@ -48,7 +48,7 @@ static void	ft_name(t_list *map, int *alert)
 			map = map->next;
 		}
 		if (!(start && end))
-			ft_putmsg(start);
+			ft_putmsg(start, alert);
 	}
 }
 
@@ -102,6 +102,7 @@ int			ft_error(t_list *map)
 
 	alert = 0;
 	ft_name(map, &alert);
-	ft_link(map->next, &alert);
+	if (!alert)
+		ft_link(map->next, &alert);
 	return (alert);
 }

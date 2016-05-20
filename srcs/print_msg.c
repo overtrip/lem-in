@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 16:58:47 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/19 16:29:30 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:24:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	ft_print_error(int find, int *alert)
 	}
 }
 
-void	ft_putmsg(int start)
+void	ft_putmsg(int start, int *alert)
 {
 	if (!start)
 		ft_putendl("They are no ##start");
 	else
 		ft_putendl("They are no ##end");
+	++(*alert);
 }
 
 int		ft_limit(int *limit, char *str, char *str2)
@@ -49,4 +50,12 @@ void	print_ant(t_chain *network)
 	ft_putchar('-');
 	ft_putstr(network->data->data);
 	ft_putchar(' ');
+}
+
+void	ft_msg_coo(int *alert, char c)
+{
+	ft_putstr("They are no ");
+	ft_putchar(c);
+	ft_putendl(" coordonne");
+	++(*alert);
 }

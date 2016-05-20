@@ -6,26 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 15:58:29 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/19 17:53:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/20 16:10:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static void			ft_push_room_back(t_room **map, t_room *new)
-{
-	t_room	*begin;
-
-	begin = *map;
-	if (*map)
-	{
-		while (begin->next)
-			begin = begin->next;
-		begin->next = new;
-	}
-	else
-		*map = new;
-}
 
 static void			ft_get_map(t_list **map, char *buff)
 {
@@ -35,8 +20,6 @@ static void			ft_get_map(t_list **map, char *buff)
 	alert = 0;
 	if (!buff)
 		return ;
-	/*if (buff[0] == '#' && buff[1] != '#')
-		return ;*/
 	if ((tmp = ft_create_elem(buff)))
 		ft_list_push_back(map, tmp);
 }
@@ -127,12 +110,7 @@ int					main(void)
 	}
 	free(buff);
 	if (!ft_error(map) && !ft_transfer(&room, map->next))
-	{
-		network = ft_find_way(room);
-		ft_resolver(&network, ft_atoi(map->data), room);
-	}
-	ft_lstdel(&map);
-	ft_delete_room(&room);
-	ft_delet_network(&network);
+		normal_execution(map, room, network);
+	delete_all(&map, &room, &network);
 	return (0);
 }

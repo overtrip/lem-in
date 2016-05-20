@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/19 17:50:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/20 16:31:20 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LEM_IN_H
 
 # include "libft.h"
-# include <stdio.h>
 # define SIZE 5
 
 typedef struct			s_room
@@ -31,7 +30,7 @@ typedef struct			s_room
 
 typedef struct			s_chain
 {
-	int				len;
+	int					len;
 	size_t				weight;
 	struct s_chain		*chain;
 	struct s_chain		*next;
@@ -56,14 +55,21 @@ void					ft_delet_network(t_chain **network);
 int						ft_adj(t_chain *way, t_chain *network);
 void					ft_chain_push_front(t_chain **begin, t_chain *new);
 void					ft_print_error(int find, int *alert);
-void					ft_putmsg(int start);
+void					ft_putmsg(int start, int *alert);
 int						ft_limit(int *limit, char *str, char *str2);
 void					clear_presence(t_chain *way);
-void					ft_resolver(t_chain **network, int nb_ants, t_room *map);
+void					ft_resolver(t_chain **network, int nb_ants,
+		t_room *map);
 t_room					*find_start(t_room *map, int nb);
 void					print_ant(t_chain *network);
 t_room					*find_start(t_room *map, int nb);
-
-void					ft_display_link(t_room *map);
+int						its_impossible(t_chain *way);
+void					ft_msg_coo(int *alert, char c);
+void					ft_clean(char *begin, char *droite, char *gauche);
+void					ft_push_room_back(t_room **map, t_room *new);
+void					delete_all(t_list **map, t_room **room,
+		t_chain **network);
+void					normal_execution(t_list *map, t_room *room,
+		t_chain *network);
 
 #endif

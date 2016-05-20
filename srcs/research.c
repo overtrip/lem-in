@@ -6,35 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 14:20:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/19 17:54:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/05/20 15:34:51 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-/*
- **					TODO		DELETE THIS FUNCTION
- */
-
-void			ft_see_way(t_chain *way)
-{
-	t_chain	*temp;
-
-	while (way)
-	{
-		temp = way;
-		printf("(%d)", way->len);
-		while (temp)
-		{
-			printf("[%s]->", temp->data->data);
-			temp = temp->chain;
-		}
-		printf("\n");
-		way = way->next;
-	}
-}
-
-t_room	*find_start(t_room *map, int nb)
+t_room			*find_start(t_room *map, int nb)
 {
 	while (map)
 	{
@@ -45,7 +23,7 @@ t_room	*find_start(t_room *map, int nb)
 	return (NULL);
 }
 
-static void		build_way(t_chain **network, t_chain *way)
+static int		build_way(t_chain **network, t_chain *way)
 {
 	if (way)
 		build_way(network, way->chain);
@@ -65,9 +43,21 @@ static void		build_way(t_chain **network, t_chain *way)
 		(*network)->len = way->data->presence;
 		way->data->presence = 0;
 	}
+	return (1);
 }
 
-static void		ft_solver_width(t_chain **network, t_chain **way,
+int				its_impossible(t_chain *way)
+{
+	if (way)
+		if (!way->chain)
+		{
+			ft_putendl("It's impossible, they are no way.");
+			return (1);
+		}
+	return (0);
+}
+
+static int		ft_solver_width(t_chain **network, t_chain **way,
 		t_room *start, t_room *end)
 {
 	int		i;
@@ -85,16 +75,16 @@ static void		ft_solver_width(t_chain **network, t_chain **way,
 			{
 				start->link[i]->presence = (*way)->data->presence + 1;
 				ft_chain_push_back(way, ft_create_chain(start->link[i]));
-				if (start->link[i] == end)
-				{
-					build_way(network, save);
-					return ;
-				}
+				if (start->link[i] == end && build_way(network, save))
+					return (0);
 			}
 		}
+		if (its_impossible(*way))
+			return (1);
 		*way = (*way)->chain;
 		start = (*way)->data;
 	}
+	return (0);
 }
 
 t_chain			*ft_find_way(t_room *map)
@@ -110,8 +100,7 @@ t_chain			*ft_find_way(t_room *map)
 	end = NULL;
 	start = find_start(map, 1);
 	end = find_start(map, 2);
-	ft_solver_width(&network, &way, start, end);
-//	ft_delete_way(&way);
-//	ft_see_way(network);
+	if (ft_solver_width(&network, &way, start, end))
+		return (NULL);
 	return (network);
 }
