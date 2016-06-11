@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/20 15:16:22 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/31 16:59:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:09:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ void			ft_resolver(t_chain **network, int nb_ants, t_room *map)
 		one_step(*network);
 		print_stats(*network);
 	}
+}
+
+void			null_var(t_list **map, t_room **room, t_chain **network,
+		t_list **copy)
+{
+	*map = NULL;
+	*room = NULL;
+	*network = NULL;
+	*copy = NULL;
 }

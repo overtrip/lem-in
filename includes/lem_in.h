@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 16:03:10 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/31 16:59:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:09:20 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int						ft_error(t_list *map, t_list **copy_map);
 int						test_possible(char *map, int *ants, int *piece);
 void					null_var(t_list **map, t_room **room,
 		t_chain **network, t_list **copy);
+void					null_var(t_list **map, t_room **room, t_chain **network,
+		t_list **copy);
 int						exclude_comment(char *str);
 int						nb_of_ant(char *map, int *ant);
 int						cunter_ant_declaration(int	*ants);

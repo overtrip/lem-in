@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 16:53:25 by jealonso          #+#    #+#             */
-/*   Updated: 2016/06/05 17:33:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/06/11 16:08:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				exclude_comment(char *str)
 		return (1);
 }
 
-int	valide_name(char *str)
+int				valide_name(char *str)
 {
 	int i;
 	int	space;
@@ -95,13 +95,4 @@ int				test_possible(char *map, int *ants, int *piece)
 	else if (nb_of_ant(map, ants))
 		return (1);
 	return (0);
-}
-
-void			null_var(t_list **map, t_room **room, t_chain **network,
-		t_list **copy)
-{
-	*map = NULL;
-	*room = NULL;
-	*network = NULL;
-	*copy = NULL;
 }
